@@ -92,7 +92,6 @@
     /* ===== MAIN CHAT AREA ===== */
     .chat-area { flex: 1; display: flex; flex-direction: column; min-width: 0; background: rgba(13, 2, 31, 0.4); }
     
-    /* Modern Top Bar (Gemini Style) */
     .top-bar { padding: 10px 16px; background: transparent; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; gap: 10px; }
     
     .top-left { display: flex; align-items: center; gap: 10px; flex: 1; }
@@ -102,7 +101,6 @@
     .top-title { font-weight: 500; color: var(--text-light); font-size: 18px; }
     .dropdown-arrow { font-size: 12px; color: var(--text-light); }
 
-    /* NEW: X Close Button */
     .close-chat-btn { background: transparent; border: none; color: var(--text-light); font-size: 24px; cursor: pointer; display: none; margin-right: 8px; }
     .close-chat-btn.visible { display: block; }
 
@@ -113,15 +111,12 @@
     .badge-owner { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #1a0830; font-weight: 700; border-color: #fbbf24; }
     .badge-lock { background: rgba(251, 191, 36, 0.12); color: #fbbf24; border-color: rgba(251, 191, 36, 0.2); }
     .badge-memory { background: rgba(96, 165, 250, 0.12); color: #60a5fa; border-color: rgba(96, 165, 250, 0.2); }
-
-    /* REMOVED IMAGE MODE */
     
     .top-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--pink), var(--purple)); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; cursor: pointer; overflow: hidden; flex-shrink: 0; }
 
     .chat-container { flex: 1; overflow-y: auto; padding: 8px 16px 12px; display: flex; flex-direction: column; max-width: 900px; margin: 0 auto; width: 100%; }
     .disclaimer { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 30px; padding: 4px 16px; text-align: center; font-size: 11px; color: var(--text-muted); flex-shrink: 0; margin-bottom: 6px; align-self: center; }
 
-    /* Welcome Screen (Kept Perfect) */
     .welcome-screen { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; }
     .welcome-screen.hidden { display: none; }
     .welcome-icon { font-size: 60px; margin-bottom: 12px; filter: drop-shadow(0 0 20px var(--pink)); }
@@ -144,11 +139,27 @@
     .msg-actions { display: flex; flex-wrap: wrap; gap: 2px; margin-top: 4px; }
     .msg-actions .action-btn { background: transparent; border: none; padding: 2px 10px; border-radius: 30px; font-size: 11px; color: var(--text-muted); cursor: pointer; display: inline-flex; align-items: center; gap: 4px; transition: 0.12s; }
     .msg-actions .action-btn:hover { background: rgba(139, 92, 246, 0.08); color: var(--pink); }
-    
-    /* NEW: Social Links in Chat */
-    .social-row { display: flex; gap: 8px; margin-top: 6px; }
-    .social-link { color: var(--text-muted); font-size: 18px; text-decoration: none; transition: 0.2s; }
-    .social-link:hover { color: var(--pink); transform: scale(1.1); }
+
+    /* Share Popup container */
+    .share-popup-container {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6); z-index: 150;
+      display: none; justify-content: center; align-items: center;
+    }
+    .share-popup-container.show { display: flex; }
+    .share-popup {
+      background: #1a0e30; border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px; padding: 16px; width: 250px; text-align: center;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.8);
+    }
+    .share-popup-title { font-size: 16px; font-weight: bold; margin-bottom: 12px; color: var(--text-light); }
+    .share-popup-option { 
+      display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 8px; 
+      cursor: pointer; color: var(--text-light); font-size: 14px; transition: 0.2s;
+    }
+    .share-popup-option:hover { background: rgba(255,255,255,0.08); }
+    .share-popup-option i { font-size: 18px; width: 20px; text-align: center; }
+    .cancel-share-btn { margin-top: 10px; width: 100%; padding: 10px; background: rgba(255,255,255,0.1); color: white; border-radius: 8px; border: none; cursor: pointer; }
 
     .typing-row { display: flex; gap: 10px; margin-bottom: 6px; }
     .typing-row.hidden { display: none; }
@@ -162,7 +173,6 @@
     .gen-image-card { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid rgba(139, 92, 246, 0.2); background: rgba(0, 0, 0, 0.2); }
     .gen-image-card img { width: 100%; height: auto; display: block; max-height: 380px; object-fit: cover; }
     
-    /* ===== INPUT AREA (Modern Gemini Style) ===== */
     .input-wrapper { background: transparent; padding: 6px 12px 12px; flex-shrink: 0; display: block; }
     
     .input-preview-area { max-width: 900px; margin: 0 auto; padding: 4px 0; display: none; }
@@ -251,7 +261,7 @@
         <div class="top-left">
           <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
           
-          <!-- NEW: X Close Button -->
+          <!-- X Close Button -->
           <button class="close-chat-btn" id="closeChatBtn" onclick="goToWelcome()"><i class="fas fa-times"></i></button>
           
           <div class="title-wrap">
@@ -275,7 +285,7 @@
       <div class="chat-container" id="chatContainer">
         <div class="disclaimer"><i class="fas fa-info-circle"></i> Wise King AI is an AI. Please double-check important information.</div>
         
-        <!-- Welcome Screen (Keep Perfect) -->
+        <!-- Welcome Screen -->
         <div class="welcome-screen" id="welcomeScreen">
           <div class="welcome-icon">👑</div>
           <h2 class="welcome-title" id="welcomeTitle">Sannu! Welcome to Wise King AI</h2>
@@ -289,7 +299,7 @@
         </div>
       </div>
 
-      <!-- INPUT AREA (Always Visible) -->
+      <!-- INPUT AREA -->
       <div class="input-wrapper" id="inputWrapper">
         <div class="input-preview-area" id="inputPreviewArea"></div>
         <div class="input-inner">
@@ -301,6 +311,18 @@
         </div>
       </div>
     </main>
+  </div>
+
+  <!-- Share Popup (Social Links inside Share) -->
+  <div class="share-popup-container" id="sharePopup" onclick="closeSharePopup()">
+    <div class="share-popup" onclick="event.stopPropagation()">
+      <div class="share-popup-title">Share to</div>
+      <a href="https://facebook.com/yourpage" target="_blank" class="share-popup-option"><i class="fab fa-facebook" style="color: #1877F2;"></i> Facebook</a>
+      <a href="https://tiktok.com/@yourname" target="_blank" class="share-popup-option"><i class="fab fa-tiktok" style="color: #ffffff;"></i> TikTok</a>
+      <a href="https://x.com/yourname" target="_blank" class="share-popup-option"><i class="fab fa-x-twitter" style="color: #ffffff;"></i> X / Twitter</a>
+      <a href="https://instagram.com/yourname" target="_blank" class="share-popup-option"><i class="fab fa-instagram" style="color: #E4405F;"></i> Instagram</a>
+      <button class="cancel-share-btn" onclick="closeSharePopup()">Cancel</button>
+    </div>
   </div>
 
   <!-- Rename Modal -->
@@ -391,7 +413,6 @@
     let chats = [{ id: 'chat-1', title: 'Hello World', messages: [], createdAt: Date.now() }];
     let activeChatId = 'chat-1';
     let pendingActionChatId = null;
-    let isImageMode = false; // Image mode removed
     let uploadedImages = []; 
     let memoryStore = { memories: [], locks: [] };
 
@@ -414,6 +435,7 @@
       chats.forEach(chat => {
         const div = document.createElement('div');
         div.className = 'chat-item' + (chat.id === activeChatId ? ' active' : '');
+        // SOCIAL LINKS REMOVED FROM 3-DOT MENU
         div.innerHTML = `<i class="fas fa-comment chat-icon"></i>
           <span class="chat-title">${escapeHtml(chat.title)}</span>
           <span class="chat-dots" onclick="event.stopPropagation(); toggleMenu('${chat.id}')"><i class="fas fa-ellipsis-v"></i></span>
@@ -421,16 +443,6 @@
             <div class="dropdown-option" onclick="shareChat('${chat.id}')"><i class="fas fa-share-alt"></i> Share conversation</div>
             <div class="dropdown-option" onclick="pinChat('${chat.id}')"><i class="fas fa-thumbtack"></i> Pin</div>
             <div class="dropdown-option" onclick="startRename('${chat.id}')"><i class="fas fa-pen"></i> Rename</div>
-            
-            <div class="dropdown-divider" style="border-top:1px solid rgba(255,255,255,0.1);margin:4px 0;"></div>
-            
-            <div class="dropdown-option" onclick="window.open('${SOCIAL_LINKS.facebook}', '_blank')"><i class="fab fa-facebook"></i> Facebook</div>
-            <div class="dropdown-option" onclick="window.open('${SOCIAL_LINKS.tiktok}', '_blank')"><i class="fab fa-tiktok"></i> TikTok</div>
-            <div class="dropdown-option" onclick="window.open('${SOCIAL_LINKS.twitter}', '_blank')"><i class="fab fa-x-twitter"></i> X / Twitter</div>
-            <div class="dropdown-option" onclick="window.open('${SOCIAL_LINKS.instagram}', '_blank')"><i class="fab fa-instagram"></i> Instagram</div>
-            
-            <div class="dropdown-divider" style="border-top:1px solid rgba(255,255,255,0.1);margin:4px 0;"></div>
-            
             <div class="dropdown-option delete" onclick="startDelete('${chat.id}')"><i class="fas fa-trash-alt"></i> Delete</div>
           </div>`;
         div.addEventListener('click', () => switchToChat(chat.id));
@@ -441,6 +453,14 @@
 
     function toggleMenu(chatId) { const menu = document.getElementById('menu-' + chatId); document.querySelectorAll('.dropdown-menu').forEach(m => { if (m.id !== 'menu-' + chatId) m.classList.remove('show'); }); menu.classList.toggle('show'); }
     function pinChat(chatId) { showToast('📌 Chat pinned!'); }
+
+    // Share Popup Open/Close Logic
+    function openSharePopup() {
+      document.getElementById('sharePopup').classList.add('show');
+    }
+    function closeSharePopup() {
+      document.getElementById('sharePopup').classList.remove('show');
+    }
 
     function renderMessages() {
       const area = document.getElementById('messagesArea'); area.innerHTML = '';
@@ -463,7 +483,7 @@
           actions.innerHTML = `
             <button class="action-btn" onclick="likeMsg(this)"><i class="far fa-thumbs-up"></i> Like</button>
             <button class="action-btn" onclick="dislikeMsg(this)"><i class="far fa-thumbs-down"></i> Dislike</button>
-            <button class="action-btn" onclick="shareMsg('${escapeHtml(msg.content)}')"><i class="fas fa-share-alt"></i> Share</button>
+            <button class="action-btn" onclick="openSharePopup()"><i class="fas fa-share-alt"></i> Share</button>
             <button class="action-btn" onclick="copyMsg('${escapeHtml(msg.content)}')"><i class="fas fa-copy"></i> Copy</button>
             <button class="action-btn" onclick="makeLock('${escapeHtml(msg.content)}')"><i class="fas fa-lock"></i> Lock</button>
           `; 
@@ -475,18 +495,6 @@
         }
         
         wrap.appendChild(bubble); wrap.appendChild(time); wrap.appendChild(actions);
-        
-        // NEW: Add social links under AI messages
-        if (msg.role === 'ai') {
-          const socialRow = document.createElement('div'); socialRow.className = 'social-row';
-          socialRow.innerHTML = `
-            <a href="${SOCIAL_LINKS.facebook}" target="_blank" class="social-link"><i class="fab fa-facebook"></i></a>
-            <a href="${SOCIAL_LINKS.tiktok}" target="_blank" class="social-link"><i class="fab fa-tiktok"></i></a>
-            <a href="${SOCIAL_LINKS.twitter}" target="_blank" class="social-link"><i class="fab fa-x-twitter"></i></a>
-            <a href="${SOCIAL_LINKS.instagram}" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
-          `;
-          wrap.appendChild(socialRow);
-        }
 
         row.appendChild(avatar); row.appendChild(wrap); wrapper.appendChild(row); area.appendChild(wrapper);
       });
@@ -538,7 +546,6 @@
       chat.messages.push({ role: 'user', content: text || '📎 Image attached', images, createdAt: Date.now() });
       input.value = ''; saveChats(); renderMessages();
       
-      // Image mode removed
       showTyping();
       setTimeout(async () => { const reply = await getAIResponse(text, chat); hideTyping(); chat.messages.push({ role: 'ai', content: reply, createdAt: Date.now() }); saveChats(); renderMessages(); }, 600);
     }
@@ -563,10 +570,6 @@
 
     function likeMsg(btn) { btn.classList.toggle('liked'); btn.innerHTML = btn.classList.contains('liked') ? '<i class="fas fa-thumbs-up"></i> Liked' : '<i class="far fa-thumbs-up"></i> Like'; }
     function dislikeMsg(btn) { btn.classList.toggle('disliked'); btn.innerHTML = btn.classList.contains('disliked') ? '<i class="fas fa-thumbs-down"></i> Disliked' : '<i class="far fa-thumbs-down"></i> Dislike'; }
-    function shareMsg(text) {
-      if (navigator.share) navigator.share({ text });
-      else navigator.clipboard.writeText(text).then(() => showToast('✅ Text copied!'));
-    }
     function copyMsg(text) { navigator.clipboard.writeText(text).then(() => showToast('✅ Copied!')); }
     function makeLock(text) { const title = text.split('\n')[0].substring(0, 40) + (text.length > 40 ? '...' : ''); createLock(title, text); }
     function deleteMsg(index) { const chat = chats.find(c => c.id === activeChatId); if (chat && confirm('Delete this message?')) { chat.messages.splice(index, 1); saveChats(); renderMessages(); } }
@@ -574,9 +577,12 @@
     function confirmRename() { const newTitle = document.getElementById('renameInput').value.trim(); if (pendingActionChatId && newTitle) renameChat(pendingActionChatId, newTitle); closeModal('renameModal'); pendingActionChatId = null; }
     function startDelete(chatId) { pendingActionChatId = chatId; document.getElementById('deleteModal').classList.add('show'); }
     function confirmDelete() { if (pendingActionChatId) deleteChat(pendingActionChatId); closeModal('deleteModal'); pendingActionChatId = null; }
-    function shareChat(chatId) { const chat = chats.find(c => c.id === chatId); if (chat) { const text = `Wise King AI Chat: ${chat.title}\n\n${chat.messages.map(m => m.role + ': ' + m.content).join('\n')}`; if (navigator.share) navigator.share({ text }); else navigator.clipboard.writeText(text).then(() => showToast('✅ Chat copied!')); } }
+    function shareChat(chatId) { 
+      // Opens the social share popup for the chat
+      openSharePopup();
+    }
 
-    // ===== NEW: GO TO WELCOME SCREEN =====
+    // ===== GO TO WELCOME SCREEN =====
     function goToWelcome() {
       activeChatId = null;
       document.getElementById('messagesArea').innerHTML = '';
@@ -680,7 +686,7 @@
       }
 
       const voiceLang = localStorage.getItem('wk_voice_lang'); if (voiceLang) document.getElementById('voiceLangSelect').value = voiceLang;
-      console.log('👑 Wise King AI — Fully Active with Social Links & X Button!');
+      console.log('👑 Wise King AI — Fully Active with Social Links inside Share!');
     }
 
     document.addEventListener('click', (e) => { if (window.innerWidth <= 768) { const sidebar = document.getElementById('sidebar'); const toggle = document.querySelector('.menu-toggle'); if (!sidebar.contains(e.target) && !toggle?.contains(e.target)) sidebar.classList.remove('open'); } });
