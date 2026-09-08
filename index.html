@@ -11,7 +11,7 @@
       --bg-deep: #0d021f;
       --bg-card: #1a0830;
       --border-glow: rgba(139, 92, 246, 0.3);
-      --pink: #ec4899; /* Default theme color */
+      --pink: #ec4899;
       --purple: #8b5cf6;
       --text-light: #f3e8ff;
       --text-muted: #9ca3af;
@@ -74,7 +74,7 @@
     .chat-item:hover .chat-dots { opacity: 1; }
     .chat-dots:hover { background: rgba(255, 255, 255, 0.1); color: var(--text-light); }
 
-    .dropdown-menu { position: absolute; right: 4px; top: 40px; background: #2a1a45; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; min-width: 180px; padding: 6px 0; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6); display: none; z-index: 60; }
+    .dropdown-menu { position: absolute; right: 4px; top: 40px; background: #2a1a45; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; min-width: 200px; padding: 6px 0; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6); display: none; z-index: 60; }
     .dropdown-menu.show { display: block; }
     .dropdown-option { padding: 10px 16px; font-size: 14px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: 0.1s; color: var(--text-light); }
     .dropdown-option:hover { background: rgba(255, 255, 255, 0.08); }
@@ -102,6 +102,10 @@
     .top-title { font-weight: 500; color: var(--text-light); font-size: 18px; }
     .dropdown-arrow { font-size: 12px; color: var(--text-light); }
 
+    /* NEW: X Close Button */
+    .close-chat-btn { background: transparent; border: none; color: var(--text-light); font-size: 24px; cursor: pointer; display: none; margin-right: 8px; }
+    .close-chat-btn.visible { display: block; }
+
     .top-right { display: flex; align-items: center; gap: 12px; }
     .icon-btn-top { background: transparent; border: none; color: var(--text-light); font-size: 20px; cursor: pointer; }
     
@@ -110,15 +114,14 @@
     .badge-lock { background: rgba(251, 191, 36, 0.12); color: #fbbf24; border-color: rgba(251, 191, 36, 0.2); }
     .badge-memory { background: rgba(96, 165, 250, 0.12); color: #60a5fa; border-color: rgba(96, 165, 250, 0.2); }
 
-    .mode-toggle { display: flex; gap: 4px; margin-left: 10px; }
-    .mode-btn { padding: 4px 12px; border-radius: 30px; border: none; font-size: 12px; cursor: pointer; background: rgba(255, 255, 255, 0.05); color: var(--text-muted); transition: 0.15s; }
-    .mode-btn.active { background: var(--pink); color: white; }
+    /* REMOVED IMAGE MODE */
     
     .top-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--pink), var(--purple)); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; cursor: pointer; overflow: hidden; flex-shrink: 0; }
 
     .chat-container { flex: 1; overflow-y: auto; padding: 8px 16px 12px; display: flex; flex-direction: column; max-width: 900px; margin: 0 auto; width: 100%; }
     .disclaimer { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 30px; padding: 4px 16px; text-align: center; font-size: 11px; color: var(--text-muted); flex-shrink: 0; margin-bottom: 6px; align-self: center; }
 
+    /* Welcome Screen (Kept Perfect) */
     .welcome-screen { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; }
     .welcome-screen.hidden { display: none; }
     .welcome-icon { font-size: 60px; margin-bottom: 12px; filter: drop-shadow(0 0 20px var(--pink)); }
@@ -137,9 +140,15 @@
     .msg-bubble.user { background: linear-gradient(135deg, var(--pink), var(--purple)); color: white; border-bottom-right-radius: 4px; }
     .msg-bubble.ai { background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.2); color: var(--text-light); border-bottom-left-radius: 4px; }
     .msg-time { font-size: 9px; color: var(--text-muted); margin-top: 2px; opacity: 0.7; }
+    
     .msg-actions { display: flex; flex-wrap: wrap; gap: 2px; margin-top: 4px; }
     .msg-actions .action-btn { background: transparent; border: none; padding: 2px 10px; border-radius: 30px; font-size: 11px; color: var(--text-muted); cursor: pointer; display: inline-flex; align-items: center; gap: 4px; transition: 0.12s; }
     .msg-actions .action-btn:hover { background: rgba(139, 92, 246, 0.08); color: var(--pink); }
+    
+    /* NEW: Social Links in Chat */
+    .social-row { display: flex; gap: 8px; margin-top: 6px; }
+    .social-link { color: var(--text-muted); font-size: 18px; text-decoration: none; transition: 0.2s; }
+    .social-link:hover { color: var(--pink); transform: scale(1.1); }
 
     .typing-row { display: flex; gap: 10px; margin-bottom: 6px; }
     .typing-row.hidden { display: none; }
@@ -156,7 +165,6 @@
     /* ===== INPUT AREA (Modern Gemini Style) ===== */
     .input-wrapper { background: transparent; padding: 6px 12px 12px; flex-shrink: 0; display: block; }
     
-    /* Preview inside input box */
     .input-preview-area { max-width: 900px; margin: 0 auto; padding: 4px 0; display: none; }
     .input-preview-area.show { display: flex; flex-wrap: wrap; gap: 8px; }
     .preview-thumb { position: relative; width: 48px; height: 48px; border-radius: 8px; overflow: hidden; border: 1px solid var(--pink); }
@@ -242,6 +250,10 @@
       <div class="top-bar">
         <div class="top-left">
           <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+          
+          <!-- NEW: X Close Button -->
+          <button class="close-chat-btn" id="closeChatBtn" onclick="goToWelcome()"><i class="fas fa-times"></i></button>
+          
           <div class="title-wrap">
             <span class="top-title" id="chatTitle">Wise King AI</span>
             <i class="fas fa-chevron-down dropdown-arrow"></i>
@@ -251,11 +263,6 @@
         <div class="top-right">
           <button class="icon-btn-top"><i class="fas fa-pen"></i></button>
           <button class="icon-btn-top"><i class="fas fa-ellipsis-v"></i></button>
-          
-          <div class="mode-toggle">
-            <button class="mode-btn active" id="chatModeBtn" onclick="setMode(false)"><i class="fas fa-comment"></i> Chat</button>
-            <button class="mode-btn" id="imageModeBtn" onclick="setMode(true)"><i class="fas fa-palette"></i> Image</button>
-          </div>
           
           <span class="badge badge-owner" id="ownerBadge" style="display:none;">👑 Owner</span>
           <span class="badge badge-lock" id="lockBadge" style="display:none;"><i class="fas fa-lock"></i> <span id="lockCount">0</span></span>
@@ -267,11 +274,14 @@
 
       <div class="chat-container" id="chatContainer">
         <div class="disclaimer"><i class="fas fa-info-circle"></i> Wise King AI is an AI. Please double-check important information.</div>
+        
+        <!-- Welcome Screen (Keep Perfect) -->
         <div class="welcome-screen" id="welcomeScreen">
           <div class="welcome-icon">👑</div>
           <h2 class="welcome-title" id="welcomeTitle">Sannu! Welcome to Wise King AI</h2>
           <p class="welcome-desc" id="welcomeDesc">I'm your persistent, intelligent assistant — created by <strong style="color:var(--pink);">IBRAHIM ABDULLAHI</strong> from Nigeria 🇳🇬<br>I remember projects, <strong style="color:#fbbf24;">Master Locks</strong>, and your preferences across all chats. 🧠🔒</p>
         </div>
+        
         <div class="messages-area" id="messagesArea"></div>
         <div class="typing-row hidden" id="typingRow">
           <div class="msg-avatar">👑</div>
@@ -317,12 +327,11 @@
     </div>
   </div>
 
-  <!-- Settings Modal (Profile, Theme, Welcome) -->
+  <!-- Settings Modal -->
   <div class="modal-overlay" id="settingsModal">
     <div class="modal-content">
       <div class="modal-title"><i class="fas fa-cog"></i> Settings</div>
       
-      <!-- Profile Section -->
       <label style="display:block;font-size:15px;font-weight:700;color:var(--text-light);margin-bottom:12px;">👤 Profile</label>
       <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
         <div class="profile-avatar" style="width:56px;height:56px;font-size:24px;" id="profileAvatarPreview">
@@ -338,7 +347,6 @@
       </div>
       <input type="text" class="modal-input" id="profileNameInput" placeholder="Your name..." />
 
-      <!-- Theme Section -->
       <label style="display:block;font-size:15px;font-weight:700;color:var(--text-light);margin-bottom:12px;">🎨 Theme Color</label>
       <div style="display:flex;gap:10px;margin-bottom:16px;">
         <div onclick="changeTheme('#ec4899')" style="width:32px;height:32px;border-radius:50%;background:#ec4899;cursor:pointer;border:2px solid transparent;"></div>
@@ -349,7 +357,6 @@
         <div onclick="changeTheme('#ef4444')" style="width:32px;height:32px;border-radius:50%;background:#ef4444;cursor:pointer;border:2px solid transparent;"></div>
       </div>
       
-      <!-- Welcome Message Section -->
       <label style="display:block;font-size:15px;font-weight:700;color:var(--text-light);margin-bottom:12px;">👋 Custom Welcome Note</label>
       <textarea class="modal-input" id="welcomeInput" rows="2" placeholder="Write your custom welcome message here..."></textarea>
 
@@ -373,14 +380,21 @@
   <div class="toast" id="toast"></div>
 
   <script>
+    // ===== YOUR SOCIAL MEDIA LINKS (Replace placeholders here) =====
+    const SOCIAL_LINKS = {
+      facebook: "https://facebook.com/yourpage",
+      tiktok: "https://tiktok.com/@yourname",
+      twitter: "https://x.com/yourname",
+      instagram: "https://instagram.com/yourname"
+    };
+
     let chats = [{ id: 'chat-1', title: 'Hello World', messages: [], createdAt: Date.now() }];
     let activeChatId = 'chat-1';
     let pendingActionChatId = null;
-    let isImageMode = false;
+    let isImageMode = false; // Image mode removed
     let uploadedImages = []; 
     let memoryStore = { memories: [], locks: [] };
 
-    // ===== CORE DATA FUNCTIONS =====
     function loadMemory() { try { const stored = localStorage.getItem('wk_memory'); if (stored) memoryStore = JSON.parse(stored); } catch(e) {} updateBadges(); }
     function saveMemory() { localStorage.setItem('wk_memory', JSON.stringify(memoryStore)); updateBadges(); }
     function createLock(title, content) { memoryStore.locks.push({ id: 'lock-' + Date.now(), title, content, active: true }); saveMemory(); showToast('🔒 Master Lock: ' + title); }
@@ -407,6 +421,16 @@
             <div class="dropdown-option" onclick="shareChat('${chat.id}')"><i class="fas fa-share-alt"></i> Share conversation</div>
             <div class="dropdown-option" onclick="pinChat('${chat.id}')"><i class="fas fa-thumbtack"></i> Pin</div>
             <div class="dropdown-option" onclick="startRename('${chat.id}')"><i class="fas fa-pen"></i> Rename</div>
+            
+            <div class="dropdown-divider" style="border-top:1px solid rgba(255,255,255,0.1);margin:4px 0;"></div>
+            
+            <div class="dropdown-option" onclick="window.open('${SOCIAL_LINKS.facebook}', '_blank')"><i class="fab fa-facebook"></i> Facebook</div>
+            <div class="dropdown-option" onclick="window.open('${SOCIAL_LINKS.tiktok}', '_blank')"><i class="fab fa-tiktok"></i> TikTok</div>
+            <div class="dropdown-option" onclick="window.open('${SOCIAL_LINKS.twitter}', '_blank')"><i class="fab fa-x-twitter"></i> X / Twitter</div>
+            <div class="dropdown-option" onclick="window.open('${SOCIAL_LINKS.instagram}', '_blank')"><i class="fab fa-instagram"></i> Instagram</div>
+            
+            <div class="dropdown-divider" style="border-top:1px solid rgba(255,255,255,0.1);margin:4px 0;"></div>
+            
             <div class="dropdown-option delete" onclick="startDelete('${chat.id}')"><i class="fas fa-trash-alt"></i> Delete</div>
           </div>`;
         div.addEventListener('click', () => switchToChat(chat.id));
@@ -423,6 +447,8 @@
       const chat = chats.find(c => c.id === activeChatId);
       if (!chat) return;
       document.getElementById('welcomeScreen').classList.add('hidden');
+      document.getElementById('closeChatBtn').classList.add('visible'); // Show X button
+      
       chat.messages.forEach((msg, idx) => {
         const wrapper = document.createElement('div'); wrapper.className = 'message-wrapper';
         const row = document.createElement('div'); row.className = 'message-row ' + msg.role;
@@ -432,9 +458,37 @@
         if (msg.images && msg.images.length) { msg.images.forEach(img => { const imgEl = document.createElement('img'); imgEl.src = img; imgEl.style.cssText = 'max-width:140px;max-height:140px;border-radius:8px;margin-top:6px;border:1px solid var(--pink);'; bubble.appendChild(imgEl); }); }
         const time = document.createElement('div'); time.className = 'msg-time'; time.textContent = new Date(msg.createdAt || Date.now()).toLocaleTimeString();
         const actions = document.createElement('div'); actions.className = 'msg-actions';
-        if (msg.role === 'ai') { actions.innerHTML = `<button class="action-btn" onclick="likeMsg(this)"><i class="far fa-thumbs-up"></i> Like</button><button class="action-btn" onclick="copyMsg('${escapeHtml(msg.content)}')"><i class="fas fa-copy"></i> Copy</button><button class="action-btn" onclick="makeLock('${escapeHtml(msg.content)}')"><i class="fas fa-lock"></i> Lock</button>`; }
-        else { actions.innerHTML = `<button class="action-btn" onclick="copyMsg('${escapeHtml(msg.content)}')"><i class="fas fa-copy"></i> Copy</button><button class="action-btn" onclick="deleteMsg(${idx})"><i class="fas fa-trash-alt"></i> Delete</button>`; }
-        wrap.appendChild(bubble); wrap.appendChild(time); wrap.appendChild(actions); row.appendChild(avatar); row.appendChild(wrap); wrapper.appendChild(row); area.appendChild(wrapper);
+        
+        if (msg.role === 'ai') { 
+          actions.innerHTML = `
+            <button class="action-btn" onclick="likeMsg(this)"><i class="far fa-thumbs-up"></i> Like</button>
+            <button class="action-btn" onclick="dislikeMsg(this)"><i class="far fa-thumbs-down"></i> Dislike</button>
+            <button class="action-btn" onclick="shareMsg('${escapeHtml(msg.content)}')"><i class="fas fa-share-alt"></i> Share</button>
+            <button class="action-btn" onclick="copyMsg('${escapeHtml(msg.content)}')"><i class="fas fa-copy"></i> Copy</button>
+            <button class="action-btn" onclick="makeLock('${escapeHtml(msg.content)}')"><i class="fas fa-lock"></i> Lock</button>
+          `; 
+        } else { 
+          actions.innerHTML = `
+            <button class="action-btn" onclick="copyMsg('${escapeHtml(msg.content)}')"><i class="fas fa-copy"></i> Copy</button>
+            <button class="action-btn" onclick="deleteMsg(${idx})"><i class="fas fa-trash-alt"></i> Delete</button>
+          `; 
+        }
+        
+        wrap.appendChild(bubble); wrap.appendChild(time); wrap.appendChild(actions);
+        
+        // NEW: Add social links under AI messages
+        if (msg.role === 'ai') {
+          const socialRow = document.createElement('div'); socialRow.className = 'social-row';
+          socialRow.innerHTML = `
+            <a href="${SOCIAL_LINKS.facebook}" target="_blank" class="social-link"><i class="fab fa-facebook"></i></a>
+            <a href="${SOCIAL_LINKS.tiktok}" target="_blank" class="social-link"><i class="fab fa-tiktok"></i></a>
+            <a href="${SOCIAL_LINKS.twitter}" target="_blank" class="social-link"><i class="fab fa-x-twitter"></i></a>
+            <a href="${SOCIAL_LINKS.instagram}" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+          `;
+          wrap.appendChild(socialRow);
+        }
+
+        row.appendChild(avatar); row.appendChild(wrap); wrapper.appendChild(row); area.appendChild(wrapper);
       });
       document.getElementById('chatContainer').scrollTop = document.getElementById('chatContainer').scrollHeight;
     }
@@ -483,7 +537,8 @@
       const images = [...uploadedImages]; uploadedImages = []; updatePreviewArea();
       chat.messages.push({ role: 'user', content: text || '📎 Image attached', images, createdAt: Date.now() });
       input.value = ''; saveChats(); renderMessages();
-      if (isImageMode) { generateImage(text); return; }
+      
+      // Image mode removed
       showTyping();
       setTimeout(async () => { const reply = await getAIResponse(text, chat); hideTyping(); chat.messages.push({ role: 'ai', content: reply, createdAt: Date.now() }); saveChats(); renderMessages(); }, 600);
     }
@@ -502,25 +557,16 @@
       } catch (err) { return '❌ ' + err.message; }
     }
 
-    async function generateImage(prompt) {
-      showTyping(); document.querySelector('.typing-bubble').innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> Generating image...';
-      try {
-        const encoded = encodeURIComponent(prompt + ", high quality, detailed, 8K");
-        const imageUrl = `https://image.pollinations.ai/prompt/${encoded}?width=1024&height=1024&seed=${Date.now()}&model=flux`;
-        const test = await fetch(imageUrl, { method: 'HEAD' });
-        if (!test.ok) throw new Error('Pollinations failed');
-        hideTyping();
-        const chat = chats.find(c => c.id === activeChatId);
-        if (chat) { chat.messages.push({ role: 'ai', content: '✅ Here is your generated image!', images: [imageUrl], createdAt: Date.now() }); saveChats(); renderMessages(); }
-        showToast('✅ Image generated!');
-      } catch (err) { hideTyping(); const chat = chats.find(c => c.id === activeChatId); if (chat) chat.messages.push({ role: 'ai', content: '❌ Image generation failed: ' + err.message, createdAt: Date.now() }); saveChats(); renderMessages(); }
-    }
-
     function showTyping() { document.getElementById('typingRow').classList.remove('hidden'); document.getElementById('typingRow').querySelector('.typing-bubble').innerHTML = `<div class="typing-dots"><span></span><span></span><span></span></div>`; }
     function hideTyping() { document.getElementById('typingRow').classList.add('hidden'); }
     function toggleVoice() { showToast('🎤 Voice input active!'); }
 
     function likeMsg(btn) { btn.classList.toggle('liked'); btn.innerHTML = btn.classList.contains('liked') ? '<i class="fas fa-thumbs-up"></i> Liked' : '<i class="far fa-thumbs-up"></i> Like'; }
+    function dislikeMsg(btn) { btn.classList.toggle('disliked'); btn.innerHTML = btn.classList.contains('disliked') ? '<i class="fas fa-thumbs-down"></i> Disliked' : '<i class="far fa-thumbs-down"></i> Dislike'; }
+    function shareMsg(text) {
+      if (navigator.share) navigator.share({ text });
+      else navigator.clipboard.writeText(text).then(() => showToast('✅ Text copied!'));
+    }
     function copyMsg(text) { navigator.clipboard.writeText(text).then(() => showToast('✅ Copied!')); }
     function makeLock(text) { const title = text.split('\n')[0].substring(0, 40) + (text.length > 40 ? '...' : ''); createLock(title, text); }
     function deleteMsg(index) { const chat = chats.find(c => c.id === activeChatId); if (chat && confirm('Delete this message?')) { chat.messages.splice(index, 1); saveChats(); renderMessages(); } }
@@ -530,14 +576,24 @@
     function confirmDelete() { if (pendingActionChatId) deleteChat(pendingActionChatId); closeModal('deleteModal'); pendingActionChatId = null; }
     function shareChat(chatId) { const chat = chats.find(c => c.id === chatId); if (chat) { const text = `Wise King AI Chat: ${chat.title}\n\n${chat.messages.map(m => m.role + ': ' + m.content).join('\n')}`; if (navigator.share) navigator.share({ text }); else navigator.clipboard.writeText(text).then(() => showToast('✅ Chat copied!')); } }
 
-    // ===== NEW SETTINGS FUNCTIONS =====
+    // ===== NEW: GO TO WELCOME SCREEN =====
+    function goToWelcome() {
+      activeChatId = null;
+      document.getElementById('messagesArea').innerHTML = '';
+      document.getElementById('welcomeScreen').classList.remove('hidden');
+      document.getElementById('closeChatBtn').classList.remove('visible');
+      document.getElementById('chatTitle').textContent = 'Wise King AI';
+      document.getElementById('inputWrapper').classList.add('active');
+      renderChats();
+    }
+
+    // ===== SETTINGS FUNCTIONS =====
     function openSettings() {
       document.getElementById('profileNameInput').value = document.getElementById('profileName').textContent;
       document.getElementById('apiKeyInput').value = localStorage.getItem('wk_api_key') || '';
       document.getElementById('voiceLangSelect').value = localStorage.getItem('wk_voice_lang') || 'ha-NG';
       document.getElementById('welcomeInput').value = localStorage.getItem('wk_welcome') || '';
       
-      // Preload Avatar
       const savedAvatar = localStorage.getItem('wk_avatar');
       if (savedAvatar) {
         document.getElementById('avatarPreviewImg').src = savedAvatar;
@@ -560,7 +616,6 @@
         document.getElementById('avatarPreviewImg').src = data;
         document.getElementById('avatarPreviewImg').style.display = 'block';
         document.getElementById('avatarPreviewText').style.display = 'none';
-        // Update sidebar and top bar instantly
         document.getElementById('profileAvatar').innerHTML = `<img src="${data}" style="width:100%;height:100%;object-fit:cover;" />`;
         document.getElementById('topAvatar').innerHTML = `<img src="${data}" style="width:100%;height:100%;object-fit:cover;" />`;
       };
@@ -582,7 +637,6 @@
       document.getElementById('profileName').textContent = name;
       localStorage.setItem('wk_user_name', name);
 
-      // Update welcome screen
       const welcomeMsg = document.getElementById('welcomeInput').value;
       document.getElementById('welcomeTitle').textContent = welcomeMsg.split('\n')[0] || 'Sannu! Welcome to Wise King AI';
       document.getElementById('welcomeDesc').innerHTML = welcomeMsg.split('\n').slice(1).join('<br>') || "I'm your persistent, intelligent assistant — created by <strong style='color:var(--pink);'>IBRAHIM ABDULLAHI</strong> from Nigeria 🇳🇬";
@@ -596,7 +650,6 @@
     function filterChats() { const q = document.getElementById('searchInput').value.toLowerCase(); document.querySelectorAll('.chat-item').forEach(el => { const title = el.querySelector('.chat-title').textContent.toLowerCase(); el.style.display = title.includes(q) ? '' : 'none'; }); }
     function clearAllData() { if (confirm('Are you sure you want to delete ALL data?')) { localStorage.clear(); location.reload(); } }
     function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(t._timer); t._timer = setTimeout(() => t.classList.remove('show'), 3000); }
-    function setMode(imageMode) { isImageMode = imageMode; document.getElementById('chatModeBtn').classList.toggle('active', !imageMode); document.getElementById('imageModeBtn').classList.toggle('active', imageMode); document.getElementById('messageInput').placeholder = imageMode ? 'Describe the image you want to create...' : 'Message Wise King AI...'; }
 
     function handleKeyDown(e) {
       if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
@@ -608,22 +661,18 @@
     function init() {
       loadMemory(); loadChats();
       
-      // Load Custom Theme
       const theme = localStorage.getItem('wk_theme');
       if (theme) document.documentElement.style.setProperty('--pink', theme);
 
-      // Load Profile Name
       const savedName = localStorage.getItem('wk_user_name');
       if (savedName) { document.getElementById('profileName').textContent = savedName; }
 
-      // Load Avatar
       const savedAvatar = localStorage.getItem('wk_avatar');
       if (savedAvatar) {
         document.getElementById('profileAvatar').innerHTML = `<img src="${savedAvatar}" style="width:100%;height:100%;object-fit:cover;" />`;
         document.getElementById('topAvatar').innerHTML = `<img src="${savedAvatar}" style="width:100%;height:100%;object-fit:cover;" />`;
       }
 
-      // Load Custom Welcome
       const welcomeMsg = localStorage.getItem('wk_welcome');
       if (welcomeMsg) {
         document.getElementById('welcomeTitle').textContent = welcomeMsg.split('\n')[0];
@@ -631,7 +680,7 @@
       }
 
       const voiceLang = localStorage.getItem('wk_voice_lang'); if (voiceLang) document.getElementById('voiceLangSelect').value = voiceLang;
-      console.log('👑 Wise King AI — Fully Active with Custom Settings!');
+      console.log('👑 Wise King AI — Fully Active with Social Links & X Button!');
     }
 
     document.addEventListener('click', (e) => { if (window.innerWidth <= 768) { const sidebar = document.getElementById('sidebar'); const toggle = document.querySelector('.menu-toggle'); if (!sidebar.contains(e.target) && !toggle?.contains(e.target)) sidebar.classList.remove('open'); } });
