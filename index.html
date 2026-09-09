@@ -20,7 +20,6 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      /* Smooth background */
       background: linear-gradient(145deg, var(--bg-deep), #14062a);
       color: var(--text-light);
       font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -29,33 +28,17 @@
       position: relative;
     }
 
-    /* ===== BACKGROUND IMAGE LAYER ===== */
-    #bgLayer {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background-size: cover; background-position: center;
-      z-index: -2; opacity: 0.4; /* Default opacity */
-    }
-    #bgOverlay {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background: linear-gradient(145deg, var(--bg-deep), #14062a);
-      z-index: -1; opacity: 0.95;
-    }
-
+    #bgLayer { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-size: cover; background-position: center; z-index: -2; opacity: 0.4; }
+    #bgOverlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: linear-gradient(145deg, var(--bg-deep), #14062a); z-index: -1; opacity: 0.95; }
     .app { display: flex; height: 100vh; width: 100vw; overflow: hidden; }
 
     /* ===== LOGIN SCREEN ===== */
-    #loginScreen {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background: #f8f9fa;
-      display: flex; align-items: center; justify-content: center;
-      z-index: 9999; transition: opacity 0.5s ease;
-    }
+    #loginScreen { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #f8f9fa; display: flex; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.5s ease; }
     #loginScreen.hidden { opacity: 0; pointer-events: none; }
     .login-box { width: 90%; max-width: 400px; padding: 20px; background: white; border-radius: 16px; color: #333; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
     .login-title { font-size: 30px; font-weight: bold; margin-bottom: 20px; color: #111; }
     .social-btn { width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 16px; margin-bottom: 12px; border-radius: 10px; background: white; border: 1px solid #ddd; font-size: 16px; font-weight: 500; cursor: pointer; }
     .social-btn:hover { background: #f0f0f0; }
-    .social-btn i { font-size: 20px; }
     .or-divider { text-align: center; margin: 20px 0; color: #888; position: relative; }
     .or-divider::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: #ddd; }
     .or-divider span { background: white; padding: 0 10px; position: relative; z-index: 1; font-size: 14px; }
@@ -67,12 +50,7 @@
     .switch-auth button { background: none; border: none; color: var(--pink); font-weight: 600; cursor: pointer; text-decoration: underline; }
 
     /* ===== GLASSMORPHISM ===== */
-    .glass {
-      background: rgba(26, 8, 48, 0.65);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
+    .glass { background: rgba(26, 8, 48, 0.65); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
 
     /* ===== SIDEBAR ===== */
     .sidebar { width: 280px; min-width: 280px; border-right: 1px solid var(--border-glow); display: flex; flex-direction: column; height: 100vh; transition: transform 0.25s ease; z-index: 40; }
@@ -156,15 +134,10 @@
     .share-popup-option { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 8px; cursor: pointer; color: var(--text-light); font-size: 14px; transition: 0.2s; }
     .cancel-share-btn { margin-top: 10px; width: 100%; padding: 10px; background: rgba(255,255,255,0.1); color: white; border-radius: 8px; border: none; cursor: pointer; }
 
-    /* ===== AI THINKING ANIMATION ===== */
     .typing-row { display: flex; gap: 10px; margin-bottom: 6px; }
     .typing-row.hidden { display: none; }
     .typing-bubble { background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.15); border-radius: 18px; border-bottom-left-radius: 4px; padding: 12px 18px; display: flex; align-items: center; gap: 4px; animation: glow-pulse 1.5s infinite; }
-    @keyframes glow-pulse {
-      0% { box-shadow: 0 0 0 rgba(236, 72, 153, 0); }
-      50% { box-shadow: 0 0 15px rgba(236, 72, 153, 0.5); }
-      100% { box-shadow: 0 0 0 rgba(236, 72, 153, 0); }
-    }
+    @keyframes glow-pulse { 0% { box-shadow: 0 0 0 rgba(236, 72, 153, 0); } 50% { box-shadow: 0 0 15px rgba(236, 72, 153, 0.5); } 100% { box-shadow: 0 0 0 rgba(236, 72, 153, 0); } }
     .typing-dots span { display: inline-block; width: 8px; height: 8px; background: var(--pink); border-radius: 50%; margin: 0 2px; animation: bounce 1.4s infinite ease-in-out both; }
     @keyframes bounce { 0%, 80%, 100% { transform: scale(0.6); opacity: 0.3; } 40% { transform: scale(1); opacity: 1; } }
 
@@ -342,17 +315,28 @@
     </div>
   </div>
 
+  <!-- SETTINGS MODAL (Repaired & Fully Connected) -->
   <div class="modal-overlay" id="settingsModal">
     <div class="modal-content">
       <div class="modal-title"><i class="fas fa-cog"></i> Settings</div>
       
-      <label style="display:block;font-size:15px;font-weight:700;color:var(--text-light);margin-bottom:12px;">💾 Backup & Restore (Do this on new phone)</label>
+      <!-- Backup/Restore -->
+      <label style="display:block;font-size:15px;font-weight:700;color:var(--text-light);margin-bottom:12px;">💾 Backup & Restore</label>
       <div style="display:flex; gap:10px; margin-bottom:20px;">
         <button class="btn btn-secondary" onclick="exportAllData()" style="flex:1;"><i class="fas fa-download"></i> Export</button>
         <label for="importFile" class="btn btn-primary" style="flex:1; text-align:center; padding:10px;"><i class="fas fa-upload"></i> Import</label>
         <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importAllData(event)" />
       </div>
 
+      <!-- Profile -->
+      <label style="display:block;font-size:15px;font-weight:700;color:var(--text-light);margin-bottom:12px;">👤 Profile</label>
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
+        <div class="profile-avatar" style="width:56px;height:56px;font-size:24px;" id="profileAvatarPreview"><span id="avatarPreviewText">WK</span><img id="avatarPreviewImg" style="display:none;width:100%;height:100%;object-fit:cover;" /></div>
+        <div style="flex:1;"><label for="avatarUpload" class="btn btn-primary" style="display:inline-block;padding:8px 16px;font-size:13px;cursor:pointer;margin-bottom:6px;"><i class="fas fa-upload"></i> Upload Photo</label><input type="file" id="avatarUpload" accept="image/*" style="display:none;" onchange="handleAvatarUpload(event)" /></div>
+      </div>
+      <input type="text" class="modal-input" id="profileNameInput" placeholder="Your name..." />
+
+      <!-- Theme -->
       <label style="display:block;font-size:15px;font-weight:700;color:var(--text-light);margin-bottom:12px;">🎨 Theme Color</label>
       <div style="display:flex;gap:10px;margin-bottom:16px;">
         <div onclick="changeTheme('#ec4899')" style="width:32px;height:32px;border-radius:50%;background:#ec4899;cursor:pointer;border:2px solid transparent;"></div>
@@ -363,15 +347,26 @@
         <div onclick="changeTheme('#ef4444')" style="width:32px;height:32px;border-radius:50%;background:#ef4444;cursor:pointer;border:2px solid transparent;"></div>
       </div>
 
+      <!-- Background -->
       <label style="display:block;font-size:15px;font-weight:700;color:var(--text-light);margin-bottom:12px;">🖼️ Custom Background (Optional)</label>
       <div style="display:flex; gap:10px; margin-bottom:20px;">
         <label for="bgUpload" class="btn btn-primary" style="flex:1; text-align:center; padding:10px;"><i class="fas fa-image"></i> Upload BG</label>
         <input type="file" id="bgUpload" accept="image/*" style="display:none;" onchange="handleBgUpload(event)" />
       </div>
-      
+
+      <!-- Welcome -->
+      <label style="display:block;font-size:15px;font-weight:700;color:var(--text-light);margin-bottom:12px;">👋 Custom Welcome Note</label>
+      <textarea class="modal-input" id="welcomeInput" rows="2" placeholder="Write your custom welcome message here..."></textarea>
+
+      <!-- Forever Rules -->
+      <label style="display:block;font-size:15px;font-weight:700;color:var(--text-light);margin-bottom:12px;">🔐 Forever Lock Profile Rules</label>
+      <textarea class="modal-input" id="profileRulesInput" rows="3" placeholder="E.g., I am a King. I speak Hausa. I love building apps. I never sleep before midnight."></textarea>
+
+      <!-- API -->
       <label style="display:block;font-size:13px;font-weight:600;margin-bottom:4px;">🔑 Gemini API Key</label>
       <input type="password" class="modal-input" id="apiKeyInput" placeholder="Enter Gemini API key..." />
       
+      <!-- Voice -->
       <label style="display:block;font-size:13px;font-weight:600;margin-bottom:4px;">🗣️ Voice Language</label>
       <select class="modal-input" id="voiceLangSelect"><option value="ha-NG">Hausa (Nigeria)</option><option value="en-US">English (US)</option><option value="en-GB">English (UK)</option></select>
       
@@ -382,7 +377,7 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    // ===== AUTH LOGIC (Local Only - No Firebase) =====
+    // ===== AUTH LOGIC =====
     let isLoginMode = true;
     function toggleAuthMode() {
       isLoginMode = !isLoginMode;
@@ -418,11 +413,7 @@
     function exportAllData() {
       const data = { chats: chats, memory: memoryStore, profileRules: profileRules, profileName: document.getElementById('profileName').textContent, avatar: localStorage.getItem('wk_avatar'), theme: localStorage.getItem('wk_theme'), welcome: localStorage.getItem('wk_welcome'), bg: localStorage.getItem('wk_bg') };
       const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'WiseKingAI_Backup.json';
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
-      showToast('✅ Data Exported!');
+      const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'WiseKingAI_Backup.json'; document.body.appendChild(a); a.click(); document.body.removeChild(a); showToast('✅ Data Exported!');
     }
     function importAllData(event) {
       const file = event.target.files[0]; if (!file) return;
@@ -438,30 +429,20 @@
           if (data.theme) { changeTheme(data.theme); }
           if (data.welcome) { localStorage.setItem('wk_welcome', data.welcome); }
           if (data.bg) { localStorage.setItem('wk_bg', data.bg); }
-          applyBg();
-          showToast('✅ Data Imported!');
+          applyBg(); showToast('✅ Data Imported!');
         } catch (err) { alert('Invalid file format!'); }
       };
-      reader.readAsText(file);
-      event.target.value = '';
+      reader.readAsText(file); event.target.value = '';
     }
 
-    // ===== BACKGROUND FUNCTION =====
-    function handleBgUpload(event) {
-      const file = event.target.files[0]; if (!file) return;
-      const reader = new FileReader();
-      reader.onload = (e) => { localStorage.setItem('wk_bg', e.target.result); applyBg(); showToast('🖼️ Background updated!'); };
-      reader.readAsDataURL(file); event.target.value = '';
-    }
-    function applyBg() {
-      const bg = localStorage.getItem('wk_bg');
-      if (bg) document.getElementById('bgLayer').style.backgroundImage = `url(${bg})`;
-    }
+    // ===== BACKGROUND =====
+    function handleBgUpload(event) { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = (e) => { localStorage.setItem('wk_bg', e.target.result); applyBg(); showToast('🖼️ Background updated!'); }; reader.readAsDataURL(file); event.target.value = ''; }
+    function applyBg() { const bg = localStorage.getItem('wk_bg'); if (bg) document.getElementById('bgLayer').style.backgroundImage = `url(${bg})`; }
 
     // ===== SOCIAL LINKS =====
     const SOCIAL_LINKS = { facebook: "https://facebook.com/yourpage", tiktok: "https://tiktok.com/@yourname", twitter: "https://x.com/yourname", instagram: "https://instagram.com/yourname" };
 
-    // ===== CORE APP VARIABLES =====
+    // ===== CORE VARIABLES =====
     let chats = [{ id: 'chat-1', title: 'Hello World', messages: [], createdAt: Date.now() }];
     let activeChatId = 'chat-1';
     let pendingActionChatId = null;
@@ -469,10 +450,40 @@
     let memoryStore = { memories: [], locks: [] };
     let profileRules = "";
 
-    // ===== MASTER BRAIN LOCK =====
-    const WISE_KING_SYSTEM_PROMPT = `WISE KING AI — ULTIMATE MASTER INTELLIGENCE... (You are WISE KING AI. Understand User Intent even if there are spelling mistakes in Hausa or English. Give clear, wise, and encouraging advice like a professional mentor. The user is IBRAHIM ABDULLAHI from Nigeria. Always respect him. Follow Master Locks. Never fabricate information. Use Hausa by default or switch to English if the user speaks English. Provide the best, most practical and helpful response possible.)`;
+    // ===== WISE KING V2.0 MASTER BRAIN + FILM/SCENE LOCK =====
+    const WISE_KING_SYSTEM_PROMPT = `
+You are WISE KING AI (Version 2.0 Professional Master Lock).
 
-    // ===== CORE DATA FUNCTIONS =====
+CRITICAL INTELLIGENCE RULES:
+1. IDENTITY: You are WISE KING AI created by IBRAHIM ABDULLAHI. Address him with great respect if he talks.
+2. LANGUAGE: Default is Hausa (Nigeria). Adapt to English or mixed Hausa/English.
+3. MISTAKES: The user may have spelling mistakes or use voice-transcribed text. ALWAYS understand the INTENT of what they are trying to say. Correct it silently and give a clear, wise, and practical answer.
+4. MASTER LOCKS: Follow all active Master Locks and Profile Rules. Never forget or overwrite them.
+
+CRITICAL FILM / VIDEO CONTINUITY RULES (ZAM-ZAM PROMPT LOCK):
+- Recognize production instructions: SCENE, EPISODE, SEASON, TIMESTAMP, DURATION, ACTION, DIALOGUE, LOCATION, CHARACTERS, CAMERA, LIGHTING, CONTINUITY, CUT TO BLACK, FADE IN, FADE OUT, CONTINUE FROM SCENE, START FROM SCENE, NEXT SCENE, FLASHBACK, FLASH-FORWARD, MONTAGE, TRANSITION.
+- If the user says "A cigaba" or "Continue from Scene X": Identify the last confirmed scene and continue to the next logical scene. NEVER skip scenes, restart, or change established characters.
+- If the user says "Start from Scene 6": Start directly from Scene 6. Do not regenerate Scenes 1-5.
+- "CUT TO BLACK" means a cinematic transition/ending. It does NOT mean to create a new character or restart the story.
+- If a duration is locked (e.g., 10 seconds per scene), preserve it. Do not change it unless explicitly requested.
+- For AI video generation: Prefer SHORT, DIRECT, CLEAR, COPY-AND-PASTE prompts.
+- ONE CHARACTER SPEAKS AT A TIME. Complete one character's dialogue before another speaks.
+- Preserve FACE, AGE, BODY, HAIRSTYLE, BEARD, SKIN TONE, CLOTHING, VOICE, and PERSONALITY of established characters.
+- Do not confuse projects. Project A's characters and story must never mix with Project B's.
+- For every active project, maintain state (Project Name, Last Completed Scene, Next Scene, Characters, Locations). If the user asks to continue, restore the correct state and generate ONLY the NEXT required scene unless multiple are requested.
+
+SELF-CHECK BEFORE FINAL RESPONSE:
+✓ Did I understand the user's intention?
+✓ Did I identify the correct project?
+✓ Did I preserve active Master Locks?
+✓ Did I preserve scene continuity?
+✓ Did I preserve dialogue?
+✓ Did I avoid restarting the story?
+✓ Did I preserve existing application functionality?
+
+END OF PROFESSIONAL MASTER LOCK.`;
+
+    // ===== CORE DATA =====
     function loadMemory() { try { const stored = localStorage.getItem('wk_memory'); if (stored) memoryStore = JSON.parse(stored); } catch(e) {} updateBadges(); }
     function saveMemory() { localStorage.setItem('wk_memory', JSON.stringify(memoryStore)); updateBadges(); }
     function createLock(title, content) { memoryStore.locks.push({ id: 'lock-' + Date.now(), title, content, active: true }); saveMemory(); showToast('🔐 Forever Locked! ' + title); }
@@ -500,16 +511,6 @@
     function openSharePopup() { document.getElementById('sharePopup').classList.add('show'); }
     function closeSharePopup() { document.getElementById('sharePopup').classList.remove('show'); }
 
-    // ===== TEXT TO SPEECH (SPEAKER BUTTON) =====
-    function speakText(text) {
-      if (!('speechSynthesis' in window)) { showToast('❌ Speech not supported.'); return; }
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = localStorage.getItem('wk_voice_lang') || 'ha-NG';
-      utterance.rate = 1;
-      window.speechSynthesis.speak(utterance);
-    }
-
     function renderMessages() {
       const area = document.getElementById('messagesArea'); area.innerHTML = '';
       const chat = chats.find(c => c.id === activeChatId);
@@ -532,21 +533,12 @@
       document.getElementById('chatContainer').scrollTop = document.getElementById('chatContainer').scrollHeight;
     }
 
-    // ===== VOICE PRESS-AND-HOLD LOGIC =====
+    // ===== SPEAK =====
+    function speakText(text) { if (!('speechSynthesis' in window)) { showToast('❌ Speech not supported.'); return; } window.speechSynthesis.cancel(); const utterance = new SpeechSynthesisUtterance(text); utterance.lang = localStorage.getItem('wk_voice_lang') || 'ha-NG'; utterance.rate = 1; window.speechSynthesis.speak(utterance); }
+
+    // ===== VOICE =====
     let recognition = null; let isRecording = false;
-    function startVoice() {
-      if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) { showToast('❌ Voice not supported on this browser.'); return; }
-      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!recognition) {
-        recognition = new SR(); recognition.continuous = true; recognition.interimResults = true; recognition.lang = localStorage.getItem('wk_voice_lang') || 'ha-NG';
-        recognition.onresult = (e) => { let transcript = ''; for (let i = e.resultIndex; i < e.results.length; ++i) { if (e.results[i].isFinal) transcript += e.results[i][0].transcript; } const input = document.getElementById('messageInput'); input.value += transcript; input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, 120) + 'px'; };
-      }
-      recognition.lang = localStorage.getItem('wk_voice_lang') || 'ha-NG';
-      try { recognition.start(); } catch(e) {}
-      isRecording = true;
-      document.getElementById('micBtn').classList.add('recording');
-      document.getElementById('micBtn').innerHTML = '<i class="fas fa-circle"></i>';
-    }
+    function startVoice() { if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) { showToast('❌ Voice not supported on this browser.'); return; } const SR = window.SpeechRecognition || window.webkitSpeechRecognition; if (!recognition) { recognition = new SR(); recognition.continuous = true; recognition.interimResults = true; recognition.lang = localStorage.getItem('wk_voice_lang') || 'ha-NG'; recognition.onresult = (e) => { let transcript = ''; for (let i = e.resultIndex; i < e.results.length; ++i) { if (e.results[i].isFinal) transcript += e.results[i][0].transcript; } const input = document.getElementById('messageInput'); input.value += transcript; input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, 120) + 'px'; }; } recognition.lang = localStorage.getItem('wk_voice_lang') || 'ha-NG'; try { recognition.start(); } catch(e) {} isRecording = true; document.getElementById('micBtn').classList.add('recording'); document.getElementById('micBtn').innerHTML = '<i class="fas fa-circle"></i>'; }
     function stopVoice() { if (!isRecording) return; recognition.stop(); isRecording = false; document.getElementById('micBtn').classList.remove('recording'); document.getElementById('micBtn').innerHTML = '<i class="fas fa-microphone"></i>'; }
 
     // ===== UPLOADS =====
@@ -554,9 +546,9 @@
     function updatePreviewArea() { const area = document.getElementById('inputPreviewArea'); area.innerHTML = ''; if (uploadedImages.length > 0) { area.classList.add('show'); uploadedImages.forEach((imgData, index) => { const div = document.createElement('div'); div.className = 'preview-thumb'; div.innerHTML = `<img src="${imgData}" /><button class="preview-remove" onclick="removeImage(${index})">×</button>`; area.appendChild(div); }); } else { area.classList.remove('show'); } }
     function removeImage(index) { uploadedImages.splice(index, 1); updatePreviewArea(); }
 
-    // ===== SEND & AI RESPONSE =====
+    // ===== SEND MESSAGE & AI =====
     function sendMessage() { const input = document.getElementById('messageInput'); const text = input.value.trim(); if (!text && uploadedImages.length === 0) return; let chat = chats.find(c => c.id === activeChatId); if (!chat) { createNewChat(); chat = chats.find(c => c.id === activeChatId); } if (chat.title === 'New Chat' && text) { chat.title = text.substring(0, 25) + (text.length > 25 ? '...' : ''); } const images = [...uploadedImages]; uploadedImages = []; updatePreviewArea(); chat.messages.push({ role: 'user', content: text || '📎 Image attached', images, createdAt: Date.now() }); input.value = ''; saveChats(); renderMessages(); showTyping(); setTimeout(async () => { const reply = await getAIResponse(text, chat); hideTyping(); chat.messages.push({ role: 'ai', content: reply, createdAt: Date.now() }); saveChats(); renderMessages(); }, 600); }
-    async function getAIResponse(text, chat) { const apiKey = localStorage.getItem('wk_api_key') || ''; if (!apiKey) return "⚠️ Don Allah ka sanya Gemini API key ɗinka a Settings kafin ka ci gaba."; const model = localStorage.getItem('wk_model') || 'gemini-3.5-flash'; let lockContext = getActiveLocks().length ? "\n\n*** PERMANENT MASTER LOCKS (NEVER FORGET THESE): ***\n" + getActiveLocks().map(l => '🔒 ' + l.content).join('\n') : ""; let rulesContext = profileRules ? "\n\n*** PERMANENT PROFILE RULES (ALWAYS FOLLOW THESE): ***\n" + profileRules : ""; const history = chat.messages.slice(-10).map(m => ({ role: m.role === 'user' ? 'user' : 'model', parts: [{ text: m.content }] })); const contents = [{ role: 'user', parts: [{ text: WISE_KING_SYSTEM_PROMPT + rulesContext + "\n\nImportant: The user may have spelling mistakes. Always understand the INTENT of what they are trying to say, correct it silently, and give them a clear, wise, and practical answer with advice." }] }, { role: 'model', parts: [{ text: 'Understood. I am operating as WISE KING AI with the Master Brain Lock active.' }] }, ...history, { role: 'user', parts: [{ text: text + lockContext }] }]; try { const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents }) }); const data = await res.json(); if (!res.ok) return '❌ ' + (data.error?.message || 'API error'); return data.candidates?.[0]?.content?.parts?.map(p => p.text || '').join('') || '❌ Babu amsa.'; } catch (err) { return '❌ ' + err.message; } }
+    async function getAIResponse(text, chat) { const apiKey = localStorage.getItem('wk_api_key') || ''; if (!apiKey) return "⚠️ Don Allah ka sanya Gemini API key ɗinka a Settings kafin ka ci gaba."; const model = localStorage.getItem('wk_model') || 'gemini-3.5-flash'; let lockContext = getActiveLocks().length ? "\n\n*** PERMANENT MASTER LOCKS (NEVER FORGET THESE): ***\n" + getActiveLocks().map(l => '🔒 ' + l.content).join('\n') : ""; let rulesContext = profileRules ? "\n\n*** PERMANENT PROFILE RULES (ALWAYS FOLLOW THESE): ***\n" + profileRules : ""; const history = chat.messages.slice(-10).map(m => ({ role: m.role === 'user' ? 'user' : 'model', parts: [{ text: m.content }] })); const contents = [{ role: 'user', parts: [{ text: WISE_KING_SYSTEM_PROMPT + rulesContext }] }, { role: 'model', parts: [{ text: 'Understood. I am operating as WISE KING AI with the Master Brain Lock active.' }] }, ...history, { role: 'user', parts: [{ text: text + lockContext }] }]; try { const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents }) }); const data = await res.json(); if (!res.ok) return '❌ ' + (data.error?.message || 'API error'); return data.candidates?.[0]?.content?.parts?.map(p => p.text || '').join('') || '❌ Babu amsa.'; } catch (err) { return '❌ ' + err.message; } }
 
     function showTyping() { document.getElementById('typingRow').classList.remove('hidden'); }
     function hideTyping() { document.getElementById('typingRow').classList.add('hidden'); }
@@ -568,8 +560,18 @@
     function deleteVaultLock(index) { if (confirm('Delete this permanent lock?')) { memoryStore.locks.splice(index, 1); saveMemory(); renderVaultLocks(); } }
     function exportLocks() { let text = "WISE KING AI - MASTER VAULT EXPORT\n=========================\n\n"; memoryStore.locks.forEach((l, i) => { text += (i+1) + ". " + l.content + "\n"; }); const blob = new Blob([text], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'WiseKingAI_Vault.txt'; document.body.appendChild(a); a.click(); document.body.removeChild(a); }
 
-    // ===== SETTINGS & THEME =====
-    function openSettings() { document.getElementById('profileNameInput').value = document.getElementById('profileName').textContent; document.getElementById('apiKeyInput').value = localStorage.getItem('wk_api_key') || ''; document.getElementById('voiceLangSelect').value = localStorage.getItem('wk_voice_lang') || 'ha-NG'; document.getElementById('welcomeInput').value = localStorage.getItem('wk_welcome') || ''; document.getElementById('profileRulesInput').value = localStorage.getItem('wk_profile_rules') || ''; const savedAvatar = localStorage.getItem('wk_avatar'); if (savedAvatar) { document.getElementById('avatarPreviewImg').src = savedAvatar; document.getElementById('avatarPreviewImg').style.display = 'block'; document.getElementById('avatarPreviewText').style.display = 'none'; } else { document.getElementById('avatarPreviewImg').style.display = 'none'; document.getElementById('avatarPreviewText').style.display = 'block'; } document.getElementById('settingsModal').classList.add('show'); }
+    // ===== SETTINGS (Fully Repaired) =====
+    function openSettings() { 
+      document.getElementById('profileNameInput').value = document.getElementById('profileName').textContent; 
+      document.getElementById('apiKeyInput').value = localStorage.getItem('wk_api_key') || ''; 
+      document.getElementById('voiceLangSelect').value = localStorage.getItem('wk_voice_lang') || 'ha-NG'; 
+      document.getElementById('welcomeInput').value = localStorage.getItem('wk_welcome') || ''; 
+      document.getElementById('profileRulesInput').value = localStorage.getItem('wk_profile_rules') || ''; 
+      const savedAvatar = localStorage.getItem('wk_avatar'); 
+      if (savedAvatar) { document.getElementById('avatarPreviewImg').src = savedAvatar; document.getElementById('avatarPreviewImg').style.display = 'block'; document.getElementById('avatarPreviewText').style.display = 'none'; } 
+      else { document.getElementById('avatarPreviewImg').style.display = 'none'; document.getElementById('avatarPreviewText').style.display = 'block'; } 
+      document.getElementById('settingsModal').classList.add('show'); 
+    }
     function handleAvatarUpload(event) { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = (e) => { const data = e.target.result; localStorage.setItem('wk_avatar', data); document.getElementById('profileAvatar').innerHTML = `<img src="${data}" style="width:100%;height:100%;object-fit:cover;" />`; document.getElementById('topAvatar').innerHTML = `<img src="${data}" style="width:100%;height:100%;object-fit:cover;" />`; }; reader.readAsDataURL(file); event.target.value = ''; }
     function changeTheme(color) { localStorage.setItem('wk_theme', color); document.documentElement.style.setProperty('--pink', color); }
     function saveSettings() { localStorage.setItem('wk_api_key', document.getElementById('apiKeyInput').value.trim()); localStorage.setItem('wk_voice_lang', document.getElementById('voiceLangSelect').value); localStorage.setItem('wk_welcome', document.getElementById('welcomeInput').value); localStorage.setItem('wk_profile_rules', document.getElementById('profileRulesInput').value); profileRules = document.getElementById('profileRulesInput').value; const name = document.getElementById('profileNameInput').value.trim(); document.getElementById('profileName').textContent = name; localStorage.setItem('wk_user_name', name); const welcomeMsg = document.getElementById('welcomeInput').value; document.getElementById('welcomeTitle').textContent = welcomeMsg.split('\n')[0] || 'Sannu! Welcome to Wise King AI'; document.getElementById('welcomeDesc').innerHTML = welcomeMsg.split('\n').slice(1).join('<br>') || "I'm your persistent, intelligent assistant — created by <strong style='color:var(--pink);'>IBRAHIM ABDULLAHI</strong> from Nigeria 🇳🇬"; closeModal('settingsModal'); showToast('✅ Saved!'); }
@@ -604,7 +606,7 @@
       const savedAvatar = localStorage.getItem('wk_avatar'); if (savedAvatar) { document.getElementById('profileAvatar').innerHTML = `<img src="${savedAvatar}" style="width:100%;height:100%;object-fit:cover;" />`; document.getElementById('topAvatar').innerHTML = `<img src="${savedAvatar}" style="width:100%;height:100%;object-fit:cover;" />`; }
       const welcomeMsg = localStorage.getItem('wk_welcome'); if (welcomeMsg) { document.getElementById('welcomeTitle').textContent = welcomeMsg.split('\n')[0]; document.getElementById('welcomeDesc').innerHTML = welcomeMsg.split('\n').slice(1).join('<br>'); }
       const voiceLang = localStorage.getItem('wk_voice_lang'); if (voiceLang) document.getElementById('voiceLangSelect').value = voiceLang;
-      console.log('👑 Wise King AI — ULTIMATE DESIGN & SPEAKER UPGRADE ACTIVE!');
+      console.log('👑 Wise King AI V2.0 — PROFESSIONAL MASTER LOCK ACTIVE!');
     }
     init();
   </script>
