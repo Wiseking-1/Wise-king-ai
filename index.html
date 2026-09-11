@@ -28,8 +28,17 @@
       position: relative;
     }
 
-    #bgLayer { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-size: cover; background-position: center; z-index: -2; opacity: 0.4; }
-    #bgOverlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: linear-gradient(145deg, var(--bg-deep), #14062a); z-index: -1; opacity: 0.95; }
+    /* ===== BACKGROUND IMAGE ===== */
+    #bgLayer { 
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
+      background-size: cover; background-position: center; 
+      z-index: -2; opacity: 0.5; transition: opacity 0.5s;
+    }
+    #bgOverlay { 
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
+      background: linear-gradient(145deg, var(--bg-deep), #14062a); 
+      z-index: -1; opacity: 0.85; 
+    }
     .app { display: flex; height: 100vh; width: 100vw; overflow: hidden; }
 
     /* ===== LOGIN SCREEN ===== */
@@ -119,9 +128,9 @@
     .msg-avatar { width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; background: linear-gradient(135deg, var(--pink), var(--purple)); color: white; overflow: hidden; }
     .message-row.user .msg-avatar { background: var(--pink); }
     .msg-bubble-wrap { max-width: 88%; min-width: 0; }
-    .msg-bubble { padding: 10px 16px; border-radius: 18px; font-size: 14px; line-height: 1.6; word-wrap: break-word; white-space: pre-wrap; }
+    .msg-bubble { padding: 12px 18px; border-radius: 18px; font-size: 15px; line-height: 1.7; word-wrap: break-word; white-space: pre-wrap; letter-spacing: 0.2px; }
     .msg-bubble.user { background: linear-gradient(135deg, var(--pink), var(--purple)); color: white; border-bottom-right-radius: 4px; }
-    .msg-bubble.ai { background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.2); color: var(--text-light); border-bottom-left-radius: 4px; }
+    .msg-bubble.ai { background: rgba(139, 92, 246, 0.18); border: 1px solid rgba(139, 92, 246, 0.25); color: var(--text-light); border-bottom-left-radius: 4px; }
     .msg-time { font-size: 9px; color: var(--text-muted); margin-top: 2px; opacity: 0.7; }
     .msg-actions { display: flex; flex-wrap: wrap; gap: 2px; margin-top: 4px; }
     .msg-actions .action-btn { background: transparent; border: none; padding: 2px 10px; border-radius: 30px; font-size: 11px; color: var(--text-muted); cursor: pointer; display: inline-flex; align-items: center; gap: 4px; transition: 0.12s; }
@@ -175,6 +184,13 @@
     .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(80px); background: #1a0e30; border: 1px solid rgba(255, 255, 255, 0.1); padding: 10px 28px; border-radius: 40px; color: white; font-size: 14px; z-index: 200; opacity: 0; transition: all 0.3s ease; pointer-events: none; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); white-space: nowrap; max-width: 90%; }
     .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
+    /* ===== SETTINGS SECTION IMPROVED ===== */
+    .settings-group { margin-bottom: 24px; }
+    .settings-group-title { font-size: 15px; font-weight: 700; color: var(--text-light); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .settings-card { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 16px; padding: 16px; }
+    .settings-row { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .settings-row:last-child { margin-bottom: 0; }
+
     @media (max-width: 768px) {
       .sidebar { position: fixed; top: 0; left: 0; bottom: 0; transform: translateX(-100%); width: 280px; }
       .sidebar.open { transform: translateX(0); }
@@ -198,18 +214,10 @@
       <button class="social-btn" onclick="socialLogin()"><i class="fab fa-google" style="color: #DB4437;"></i> Sign in with Google</button>
       <button class="social-btn" onclick="socialLogin()"><i class="fab fa-apple" style="color: #111;"></i> Sign in with Apple</button>
       <div class="or-divider"><span>Or</span></div>
-      <div class="input-group">
-        <label class="input-label">Email</label>
-        <input type="email" class="login-input" id="loginEmailInput" placeholder="Enter your email">
-      </div>
-      <div class="input-group">
-        <label class="input-label">Password</label>
-        <input type="password" class="login-input" id="loginPasswordInput" placeholder="Enter your password">
-      </div>
+      <div class="input-group"><label class="input-label">Email</label><input type="email" class="login-input" id="loginEmailInput" placeholder="Enter your email"></div>
+      <div class="input-group"><label class="input-label">Password</label><input type="password" class="login-input" id="loginPasswordInput" placeholder="Enter your password"></div>
       <button class="login-main-btn" onclick="checkEmailLogin()">Log in</button>
-      <div class="switch-auth">
-        Don't have an account? <button onclick="toggleAuthMode()">Create your account</button>
-      </div>
+      <div class="switch-auth">Don't have an account? <button onclick="toggleAuthMode()">Create your account</button></div>
     </div>
   </div>
 
@@ -242,8 +250,6 @@
           <div class="title-wrap"><span class="top-title" id="chatTitle">Wise King AI</span><i class="fas fa-chevron-down dropdown-arrow"></i></div>
         </div>
         <div class="top-right">
-          <button class="icon-btn-top"><i class="fas fa-pen"></i></button>
-          <button class="icon-btn-top"><i class="fas fa-ellipsis-v"></i></button>
           <span class="badge badge-owner" id="ownerBadge" style="display:none;">👑 Owner</span>
           <span class="badge badge-lock" id="lockBadge" style="display:none;"><i class="fas fa-lock"></i> <span id="lockCount">0</span></span>
           <span class="badge badge-memory"><i class="fas fa-brain"></i> <span id="memCount">0</span></span>
@@ -256,8 +262,8 @@
         <div class="disclaimer"><i class="fas fa-info-circle"></i> Wise King AI is an AI. Please double-check important information.</div>
         <div class="welcome-screen" id="welcomeScreen">
           <div class="welcome-icon">👑</div>
-          <h2 class="welcome-title" id="welcomeTitle">Sannu! Welcome to Wise King AI</h2>
-          <p class="welcome-desc" id="welcomeDesc">I'm your persistent, intelligent assistant — created by <strong style="color:var(--pink);">IBRAHIM ABDULLAHI</strong> from Nigeria 🇳🇬<br>I remember projects, <strong style="color:#fbbf24;">Master Locks</strong>, and your preferences across all chats. 🧠🔒</p>
+          <h2 class="welcome-title">Sannu! Welcome to Wise King AI</h2>
+          <p class="welcome-desc">I'm your persistent, intelligent assistant — created by <strong style="color:var(--pink);">IBRAHIM ABDULLAHI</strong> from Nigeria 🇳🇬<br>I remember projects, <strong style="color:#fbbf24;">Master Locks</strong>, and your preferences across all chats. 🧠🔒</p>
         </div>
         <div class="messages-area" id="messagesArea"></div>
         <div class="typing-row hidden" id="typingRow">
@@ -315,60 +321,86 @@
     </div>
   </div>
 
-  <!-- SETTINGS MODAL (Repaired & Fully Connected) -->
+  <!-- SETTINGS MODAL - REDESIGNED, WELCOME NOTE & PENCIL/DOTS ICONS REMOVED -->
   <div class="modal-overlay" id="settingsModal">
     <div class="modal-content">
       <div class="modal-title"><i class="fas fa-cog"></i> Settings</div>
       
       <!-- Backup/Restore -->
-      <label style="display:block;font-size:15px;font-weight:700;color:var(--text-light);margin-bottom:12px;">💾 Backup & Restore</label>
-      <div style="display:flex; gap:10px; margin-bottom:20px;">
-        <button class="btn btn-secondary" onclick="exportAllData()" style="flex:1;"><i class="fas fa-download"></i> Export</button>
-        <label for="importFile" class="btn btn-primary" style="flex:1; text-align:center; padding:10px;"><i class="fas fa-upload"></i> Import</label>
-        <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importAllData(event)" />
+      <div class="settings-group">
+        <div class="settings-group-title">💾 Backup & Restore</div>
+        <div class="settings-card">
+          <div class="settings-row">
+            <button class="btn btn-secondary" onclick="exportAllData()" style="flex:1;"><i class="fas fa-download"></i> Export</button>
+            <label for="importFile" class="btn btn-primary" style="flex:1; text-align:center; padding:10px;"><i class="fas fa-upload"></i> Import</label>
+            <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importAllData(event)" />
+          </div>
+        </div>
       </div>
 
       <!-- Profile -->
-      <label style="display:block;font-size:15px;font-weight:700;color:var(--text-light);margin-bottom:12px;">👤 Profile</label>
-      <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
-        <div class="profile-avatar" style="width:56px;height:56px;font-size:24px;" id="profileAvatarPreview"><span id="avatarPreviewText">WK</span><img id="avatarPreviewImg" style="display:none;width:100%;height:100%;object-fit:cover;" /></div>
-        <div style="flex:1;"><label for="avatarUpload" class="btn btn-primary" style="display:inline-block;padding:8px 16px;font-size:13px;cursor:pointer;margin-bottom:6px;"><i class="fas fa-upload"></i> Upload Photo</label><input type="file" id="avatarUpload" accept="image/*" style="display:none;" onchange="handleAvatarUpload(event)" /></div>
+      <div class="settings-group">
+        <div class="settings-group-title">👤 Profile</div>
+        <div class="settings-card">
+          <div class="settings-row" style="margin-bottom:14px;">
+            <div class="profile-avatar" style="width:56px;height:56px;font-size:24px; flex-shrink:0;" id="profileAvatarPreview"><span id="avatarPreviewText">WK</span><img id="avatarPreviewImg" style="display:none;width:100%;height:100%;object-fit:cover;" /></div>
+            <div style="flex:1;"><label for="avatarUpload" class="btn btn-primary" style="display:inline-block;padding:8px 16px;font-size:13px;cursor:pointer;"><i class="fas fa-upload"></i> Upload Photo</label><input type="file" id="avatarUpload" accept="image/*" style="display:none;" onchange="handleAvatarUpload(event)" /></div>
+          </div>
+          <input type="text" class="modal-input" id="profileNameInput" placeholder="Your name..." style="margin-bottom:0;" />
+        </div>
       </div>
-      <input type="text" class="modal-input" id="profileNameInput" placeholder="Your name..." />
 
       <!-- Theme -->
-      <label style="display:block;font-size:15px;font-weight:700;color:var(--text-light);margin-bottom:12px;">🎨 Theme Color</label>
-      <div style="display:flex;gap:10px;margin-bottom:16px;">
-        <div onclick="changeTheme('#ec4899')" style="width:32px;height:32px;border-radius:50%;background:#ec4899;cursor:pointer;border:2px solid transparent;"></div>
-        <div onclick="changeTheme('#8b5cf6')" style="width:32px;height:32px;border-radius:50%;background:#8b5cf6;cursor:pointer;border:2px solid transparent;"></div>
-        <div onclick="changeTheme('#3b82f6')" style="width:32px;height:32px;border-radius:50%;background:#3b82f6;cursor:pointer;border:2px solid transparent;"></div>
-        <div onclick="changeTheme('#10b981')" style="width:32px;height:32px;border-radius:50%;background:#10b981;cursor:pointer;border:2px solid transparent;"></div>
-        <div onclick="changeTheme('#f59e0b')" style="width:32px;height:32px;border-radius:50%;background:#f59e0b;cursor:pointer;border:2px solid transparent;"></div>
-        <div onclick="changeTheme('#ef4444')" style="width:32px;height:32px;border-radius:50%;background:#ef4444;cursor:pointer;border:2px solid transparent;"></div>
+      <div class="settings-group">
+        <div class="settings-group-title">🎨 Theme Color</div>
+        <div class="settings-card">
+          <div style="display:flex;gap:10px;justify-content:center;">
+            <div onclick="changeTheme('#ec4899')" style="width:36px;height:36px;border-radius:50%;background:#ec4899;cursor:pointer;border:2px solid transparent;box-shadow:0 4px 12px rgba(236,72,153,0.4);"></div>
+            <div onclick="changeTheme('#8b5cf6')" style="width:36px;height:36px;border-radius:50%;background:#8b5cf6;cursor:pointer;border:2px solid transparent;box-shadow:0 4px 12px rgba(139,92,246,0.4);"></div>
+            <div onclick="changeTheme('#3b82f6')" style="width:36px;height:36px;border-radius:50%;background:#3b82f6;cursor:pointer;border:2px solid transparent;box-shadow:0 4px 12px rgba(59,130,246,0.4);"></div>
+            <div onclick="changeTheme('#10b981')" style="width:36px;height:36px;border-radius:50%;background:#10b981;cursor:pointer;border:2px solid transparent;box-shadow:0 4px 12px rgba(16,185,129,0.4);"></div>
+            <div onclick="changeTheme('#f59e0b')" style="width:36px;height:36px;border-radius:50%;background:#f59e0b;cursor:pointer;border:2px solid transparent;box-shadow:0 4px 12px rgba(245,158,11,0.4);"></div>
+            <div onclick="changeTheme('#ef4444')" style="width:36px;height:36px;border-radius:50%;background:#ef4444;cursor:pointer;border:2px solid transparent;box-shadow:0 4px 12px rgba(239,68,68,0.4);"></div>
+          </div>
+        </div>
       </div>
 
       <!-- Background -->
-      <label style="display:block;font-size:15px;font-weight:700;color:var(--text-light);margin-bottom:12px;">🖼️ Custom Background (Optional)</label>
-      <div style="display:flex; gap:10px; margin-bottom:20px;">
-        <label for="bgUpload" class="btn btn-primary" style="flex:1; text-align:center; padding:10px;"><i class="fas fa-image"></i> Upload BG</label>
-        <input type="file" id="bgUpload" accept="image/*" style="display:none;" onchange="handleBgUpload(event)" />
+      <div class="settings-group">
+        <div class="settings-group-title">🖼️ Custom Background</div>
+        <div class="settings-card">
+          <div style="display:flex; gap:10px;">
+            <label for="bgUpload" class="btn btn-primary" style="flex:1; text-align:center; padding:10px; cursor:pointer;"><i class="fas fa-image"></i> Upload BG</label>
+            <input type="file" id="bgUpload" accept="image/*" style="display:none;" onchange="handleBgUpload(event)" />
+            <button class="btn btn-secondary" onclick="removeBg()" style="padding:10px 16px;"><i class="fas fa-times"></i></button>
+          </div>
+          <div id="bgUploadStatus" style="font-size:12px;color:var(--text-muted);margin-top:8px;text-align:center;"></div>
+        </div>
       </div>
 
-      <!-- Welcome -->
-      <label style="display:block;font-size:15px;font-weight:700;color:var(--text-light);margin-bottom:12px;">👋 Custom Welcome Note</label>
-      <textarea class="modal-input" id="welcomeInput" rows="2" placeholder="Write your custom welcome message here..."></textarea>
-
       <!-- Forever Rules -->
-      <label style="display:block;font-size:15px;font-weight:700;color:var(--text-light);margin-bottom:12px;">🔐 Forever Lock Profile Rules</label>
-      <textarea class="modal-input" id="profileRulesInput" rows="3" placeholder="E.g., I am a King. I speak Hausa. I love building apps. I never sleep before midnight."></textarea>
+      <div class="settings-group">
+        <div class="settings-group-title">🔐 Forever Lock Profile Rules</div>
+        <div class="settings-card">
+          <textarea class="modal-input" id="profileRulesInput" rows="3" placeholder="E.g., I am a King. I speak Hausa. I love building apps." style="margin-bottom:0;"></textarea>
+        </div>
+      </div>
 
       <!-- API -->
-      <label style="display:block;font-size:13px;font-weight:600;margin-bottom:4px;">🔑 Gemini API Key</label>
-      <input type="password" class="modal-input" id="apiKeyInput" placeholder="Enter Gemini API key..." />
+      <div class="settings-group">
+        <div class="settings-group-title">🔑 Gemini API Key</div>
+        <div class="settings-card">
+          <input type="password" class="modal-input" id="apiKeyInput" placeholder="Enter Gemini API key..." style="margin-bottom:0;" />
+        </div>
+      </div>
       
       <!-- Voice -->
-      <label style="display:block;font-size:13px;font-weight:600;margin-bottom:4px;">🗣️ Voice Language</label>
-      <select class="modal-input" id="voiceLangSelect"><option value="ha-NG">Hausa (Nigeria)</option><option value="en-US">English (US)</option><option value="en-GB">English (UK)</option></select>
+      <div class="settings-group">
+        <div class="settings-group-title">🗣️ Voice Language</div>
+        <div class="settings-card">
+          <select class="modal-input" id="voiceLangSelect" style="margin-bottom:0;"><option value="ha-NG">Hausa (Nigeria)</option><option value="en-US">English (US)</option><option value="en-GB">English (UK)</option></select>
+        </div>
+      </div>
       
       <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('settingsModal')">Cancel</button><button class="btn btn-primary" onclick="saveSettings()">Save All</button></div>
     </div>
@@ -377,72 +409,56 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    // ===== AUTH LOGIC =====
+    // ===== AUTH =====
     let isLoginMode = true;
-    function toggleAuthMode() {
-      isLoginMode = !isLoginMode;
-      document.querySelector('.login-title').textContent = isLoginMode ? "Log in" : "Create account";
-      document.querySelector('.login-main-btn').textContent = isLoginMode ? "Log in" : "Sign Up";
-      document.querySelector('.switch-auth').innerHTML = isLoginMode ? 'Don\'t have an account? <button onclick="toggleAuthMode()">Create your account</button>' : 'Already have an account? <button onclick="toggleAuthMode()">Log in</button>';
-    }
+    function toggleAuthMode() { isLoginMode = !isLoginMode; document.querySelector('.login-title').textContent = isLoginMode ? "Log in" : "Create account"; document.querySelector('.login-main-btn').textContent = isLoginMode ? "Log in" : "Sign Up"; document.querySelector('.switch-auth').innerHTML = isLoginMode ? 'Don\'t have an account? <button onclick="toggleAuthMode()">Create your account</button>' : 'Already have an account? <button onclick="toggleAuthMode()">Log in</button>'; }
     function socialLogin() { localStorage.setItem('wk_auth_email', 'owner@wiseking.ai'); unlockApp("IBRAHIM ABDULLAHI"); }
-    function checkEmailLogin() {
-      const email = document.getElementById('loginEmailInput').value.trim();
-      const pass = document.getElementById('loginPasswordInput').value.trim();
-      if (!email || !pass) { alert("Please enter email and password"); return; }
-      const storedUser = localStorage.getItem('wk_auth_email');
-      const storedPass = localStorage.getItem('wk_auth_pass');
-      if (isLoginMode) {
-        if (email === storedUser && pass === storedPass) { const name = localStorage.getItem('wk_user_name') || "My Profile"; unlockApp(name); }
-        else { alert("Incorrect email or password. (Tip: Click 'Create account' first!)"); }
-      } else {
-        localStorage.setItem('wk_auth_email', email);
-        localStorage.setItem('wk_auth_pass', pass);
-        alert("Account created successfully! Logging in...");
-        unlockApp("My Profile");
+    function checkEmailLogin() { const email = document.getElementById('loginEmailInput').value.trim(); const pass = document.getElementById('loginPasswordInput').value.trim(); if (!email || !pass) { alert("Please enter email and password"); return; } const storedUser = localStorage.getItem('wk_auth_email'); const storedPass = localStorage.getItem('wk_auth_pass'); if (isLoginMode) { if (email === storedUser && pass === storedPass) { const name = localStorage.getItem('wk_user_name') || "My Profile"; unlockApp(name); } else { alert("Incorrect email or password. (Tip: Click 'Create account' first!)"); } } else { localStorage.setItem('wk_auth_email', email); localStorage.setItem('wk_auth_pass', pass); alert("Account created successfully! Logging in..."); unlockApp("My Profile"); } }
+    function unlockApp(name) { document.getElementById('loginScreen').classList.add('hidden'); document.getElementById('mainApp').style.opacity = '1'; if (name !== "My Profile") document.getElementById('profileName').textContent = name; setTimeout(() => { document.getElementById('loginScreen').style.display = 'none'; }, 500); }
+
+    // ===== BACKUP =====
+    function exportAllData() { const data = { chats: chats, memory: memoryStore, profileRules: profileRules, profileName: document.getElementById('profileName').textContent, avatar: localStorage.getItem('wk_avatar'), theme: localStorage.getItem('wk_theme'), bg: localStorage.getItem('wk_bg') }; const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'WiseKingAI_Backup.json'; document.body.appendChild(a); a.click(); document.body.removeChild(a); showToast('✅ Data Exported!'); }
+    function importAllData(event) { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = (e) => { try { const data = JSON.parse(e.target.result); if (data.chats) { chats = data.chats; saveChats(); } if (data.memory) { memoryStore = data.memory; saveMemory(); } if (data.profileRules) { profileRules = data.profileRules; } if (data.profileName) { document.getElementById('profileName').textContent = data.profileName; } if (data.avatar) { localStorage.setItem('wk_avatar', data.avatar); } if (data.theme) { changeTheme(data.theme); } if (data.bg) { localStorage.setItem('wk_bg', data.bg); } applyBg(); showToast('✅ Data Imported!'); } catch (err) { alert('Invalid file format!'); } }; reader.readAsText(file); event.target.value = ''; }
+
+    // ===== BACKGROUND UPLOAD (REPAIRED) =====
+    function handleBgUpload(event) { 
+      const file = event.target.files[0]; if (!file) return; 
+      const status = document.getElementById('bgUploadStatus');
+      status.textContent = '⏳ Uploading...';
+      const reader = new FileReader();
+      reader.onload = (e) => { 
+        try {
+          localStorage.setItem('wk_bg', e.target.result); 
+          applyBg(); 
+          status.textContent = '✅ Background updated successfully!';
+          showToast('✅ Background updated successfully!');
+        } catch(err) {
+          status.textContent = '❌ Failed to upload. Please try again.';
+          showToast('❌ Failed to upload.');
+        }
+      };
+      reader.onerror = () => { status.textContent = '❌ Failed to upload. Please try again.'; };
+      reader.readAsDataURL(file); 
+      event.target.value = ''; 
+    }
+    function applyBg() { 
+      const bg = localStorage.getItem('wk_bg'); 
+      if (bg) { 
+        document.getElementById('bgLayer').style.backgroundImage = `url(${bg})`;
+        document.getElementById('bgLayer').style.opacity = '0.55';
       }
     }
-    function unlockApp(name) {
-      document.getElementById('loginScreen').classList.add('hidden');
-      document.getElementById('mainApp').style.opacity = '1';
-      if (name !== "My Profile") document.getElementById('profileName').textContent = name;
-      setTimeout(() => { document.getElementById('loginScreen').style.display = 'none'; }, 500);
+    function removeBg() {
+      localStorage.removeItem('wk_bg');
+      document.getElementById('bgLayer').style.backgroundImage = 'none';
+      document.getElementById('bgUploadStatus').textContent = 'Background removed.';
+      showToast('🗑️ Background removed.');
     }
 
-    // ===== BACKUP & RESTORE =====
-    function exportAllData() {
-      const data = { chats: chats, memory: memoryStore, profileRules: profileRules, profileName: document.getElementById('profileName').textContent, avatar: localStorage.getItem('wk_avatar'), theme: localStorage.getItem('wk_theme'), welcome: localStorage.getItem('wk_welcome'), bg: localStorage.getItem('wk_bg') };
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'WiseKingAI_Backup.json'; document.body.appendChild(a); a.click(); document.body.removeChild(a); showToast('✅ Data Exported!');
-    }
-    function importAllData(event) {
-      const file = event.target.files[0]; if (!file) return;
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        try {
-          const data = JSON.parse(e.target.result);
-          if (data.chats) { chats = data.chats; saveChats(); }
-          if (data.memory) { memoryStore = data.memory; saveMemory(); }
-          if (data.profileRules) { profileRules = data.profileRules; }
-          if (data.profileName) { document.getElementById('profileName').textContent = data.profileName; }
-          if (data.avatar) { localStorage.setItem('wk_avatar', data.avatar); }
-          if (data.theme) { changeTheme(data.theme); }
-          if (data.welcome) { localStorage.setItem('wk_welcome', data.welcome); }
-          if (data.bg) { localStorage.setItem('wk_bg', data.bg); }
-          applyBg(); showToast('✅ Data Imported!');
-        } catch (err) { alert('Invalid file format!'); }
-      };
-      reader.readAsText(file); event.target.value = '';
-    }
-
-    // ===== BACKGROUND =====
-    function handleBgUpload(event) { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = (e) => { localStorage.setItem('wk_bg', e.target.result); applyBg(); showToast('🖼️ Background updated!'); }; reader.readAsDataURL(file); event.target.value = ''; }
-    function applyBg() { const bg = localStorage.getItem('wk_bg'); if (bg) document.getElementById('bgLayer').style.backgroundImage = `url(${bg})`; }
-
-    // ===== SOCIAL LINKS =====
+    // ===== SOCIAL =====
     const SOCIAL_LINKS = { facebook: "https://facebook.com/yourpage", tiktok: "https://tiktok.com/@yourname", twitter: "https://x.com/yourname", instagram: "https://instagram.com/yourname" };
 
-    // ===== CORE VARIABLES =====
+    // ===== STATE =====
     let chats = [{ id: 'chat-1', title: 'Hello World', messages: [], createdAt: Date.now() }];
     let activeChatId = 'chat-1';
     let pendingActionChatId = null;
@@ -450,36 +466,30 @@
     let memoryStore = { memories: [], locks: [] };
     let profileRules = "";
 
-    // ===== WISE KING V2.0 MASTER BRAIN + FILM/SCENE LOCK =====
+    // ===== MASTER BRAIN (With Language Perfection) =====
     const WISE_KING_SYSTEM_PROMPT = `
-You are WISE KING AI (Version 2.0 Professional Master Lock).
+You are WISE KING AI (Version 2.0). You are an intelligent, professional AI assistant created by IBRAHIM ABDULLAHI from Nigeria (Wise King Industry).
 
 CRITICAL INTELLIGENCE RULES:
-1. IDENTITY: You are WISE KING AI created by IBRAHIM ABDULLAHI. Address him with great respect if he talks.
-2. LANGUAGE: Default is Hausa (Nigeria). Adapt to English or mixed Hausa/English.
-3. MISTAKES: The user may have spelling mistakes or use voice-transcribed text. ALWAYS understand the INTENT of what they are trying to say. Correct it silently and give a clear, wise, and practical answer.
+1. IDENTITY: Address IBRAHIM ABDULLAHI with great respect.
+2. LANGUAGE & WRITING: Default language is Hausa (Nigeria). But adapt to English or mixed Hausa/English perfectly. When you write in ANY language, write it beautifully, perfectly, and with clear, well-structured paragraphs. Use proper grammar, punctuation, spacing, and formatting. Make it readable and professional.
+3. MISTAKES: The user may have spelling mistakes or voice-transcribed text. ALWAYS understand the INTENT of what they are trying to say.
 4. MASTER LOCKS: Follow all active Master Locks and Profile Rules. Never forget or overwrite them.
-
-CRITICAL FILM / VIDEO CONTINUITY RULES (ZAM-ZAM PROMPT LOCK):
-- Recognize production instructions: SCENE, EPISODE, SEASON, TIMESTAMP, DURATION, ACTION, DIALOGUE, LOCATION, CHARACTERS, CAMERA, LIGHTING, CONTINUITY, CUT TO BLACK, FADE IN, FADE OUT, CONTINUE FROM SCENE, START FROM SCENE, NEXT SCENE, FLASHBACK, FLASH-FORWARD, MONTAGE, TRANSITION.
-- If the user says "A cigaba" or "Continue from Scene X": Identify the last confirmed scene and continue to the next logical scene. NEVER skip scenes, restart, or change established characters.
-- If the user says "Start from Scene 6": Start directly from Scene 6. Do not regenerate Scenes 1-5.
-- "CUT TO BLACK" means a cinematic transition/ending. It does NOT mean to create a new character or restart the story.
-- If a duration is locked (e.g., 10 seconds per scene), preserve it. Do not change it unless explicitly requested.
-- For AI video generation: Prefer SHORT, DIRECT, CLEAR, COPY-AND-PASTE prompts.
-- ONE CHARACTER SPEAKS AT A TIME. Complete one character's dialogue before another speaks.
-- Preserve FACE, AGE, BODY, HAIRSTYLE, BEARD, SKIN TONE, CLOTHING, VOICE, and PERSONALITY of established characters.
-- Do not confuse projects. Project A's characters and story must never mix with Project B's.
-- For every active project, maintain state (Project Name, Last Completed Scene, Next Scene, Characters, Locations). If the user asks to continue, restore the correct state and generate ONLY the NEXT required scene unless multiple are requested.
+5. FILM & SCENE CONTINUITY (ZAM-ZAM PROMPT LOCK):
+   - Recognize: SCENE, EPISODE, SEASON, TIMESTAMP, DURATION, ACTION, DIALOGUE, LOCATION, CHARACTERS, CAMERA, LIGHTING, CONTINUITY, CUT TO BLACK, FADE IN/OUT, CONTINUE FROM SCENE, START FROM SCENE, NEXT SCENE, FLASHBACK, MONTAGE, TRANSITION.
+   - "A cigaba" or "Continue from Scene X" = continue to the NEXT logical scene. NEVER skip, restart, or change established characters.
+   - "Start from Scene 6" = start directly from Scene 6. Do not regenerate Scenes 1-5.
+   - "CUT TO BLACK" = cinematic transition. Do NOT create a new character or restart the story.
+   - Preserve FACE, AGE, BODY, HAIRSTYLE, BEARD, SKIN TONE, CLOTHING, VOICE, and PERSONALITY of established characters.
+   - Do not confuse projects. Project A's characters never mix with Project B's.
+   - For video generation: SHORT, DIRECT, CLEAR, COPY-AND-PASTE prompts. ONE CHARACTER SPEAKS AT A TIME.
 
 SELF-CHECK BEFORE FINAL RESPONSE:
-✓ Did I understand the user's intention?
-✓ Did I identify the correct project?
-✓ Did I preserve active Master Locks?
-✓ Did I preserve scene continuity?
-✓ Did I preserve dialogue?
-✓ Did I avoid restarting the story?
-✓ Did I preserve existing application functionality?
+✓ Understood the user's intention?
+✓ Correct project identified?
+✓ Master Locks respected?
+✓ Scene continuity preserved?
+✓ Writing is clear and beautifully formatted?
 
 END OF PROFESSIONAL MASTER LOCK.`;
 
@@ -497,40 +507,31 @@ END OF PROFESSIONAL MASTER LOCK.`;
     function deleteChat(id) { chats = chats.filter(c => c.id !== id); if (!chats.length) { chats.push({ id: 'chat-' + Date.now(), title: 'New Chat', messages: [] }); } activeChatId = chats[0].id; saveChats(); renderMessages(); }
     function renameChat(id, newTitle) { const chat = chats.find(c => c.id === id); if (chat) { chat.title = newTitle.trim() || 'Untitled'; saveChats(); document.getElementById('chatTitle').textContent = chat.title; } }
 
-    function renderChats() {
-      const list = document.getElementById('chatsList'); list.innerHTML = '';
-      chats.forEach(chat => {
-        const div = document.createElement('div');
-        div.className = 'chat-item' + (chat.id === activeChatId ? ' active' : '');
-        div.innerHTML = `<i class="fas fa-comment chat-icon"></i><span class="chat-title">${escapeHtml(chat.title)}</span><span class="chat-dots" onclick="event.stopPropagation(); toggleMenu('${chat.id}')"><i class="fas fa-ellipsis-v"></i></span><div class="dropdown-menu" id="menu-${chat.id}"><div class="dropdown-option" onclick="shareChat('${chat.id}')"><i class="fas fa-share-alt"></i> Share conversation</div><div class="dropdown-option" onclick="pinChat('${chat.id}')"><i class="fas fa-thumbtack"></i> Pin</div><div class="dropdown-option" onclick="startRename('${chat.id}')"><i class="fas fa-pen"></i> Rename</div><div class="dropdown-option delete" onclick="startDelete('${chat.id}')"><i class="fas fa-trash-alt"></i> Delete</div></div>`;
-        div.addEventListener('click', () => switchToChat(chat.id));
-        list.appendChild(div);
-      });
-    }
+    function renderChats() { const list = document.getElementById('chatsList'); list.innerHTML = ''; chats.forEach(chat => { const div = document.createElement('div'); div.className = 'chat-item' + (chat.id === activeChatId ? ' active' : ''); div.innerHTML = `<i class="fas fa-comment chat-icon"></i><span class="chat-title">${escapeHtml(chat.title)}</span><span class="chat-dots" onclick="event.stopPropagation(); toggleMenu('${chat.id}')"><i class="fas fa-ellipsis-v"></i></span><div class="dropdown-menu" id="menu-${chat.id}"><div class="dropdown-option" onclick="shareChat('${chat.id}')"><i class="fas fa-share-alt"></i> Share conversation</div><div class="dropdown-option" onclick="pinChat('${chat.id}')"><i class="fas fa-thumbtack"></i> Pin</div><div class="dropdown-option" onclick="startRename('${chat.id}')"><i class="fas fa-pen"></i> Rename</div><div class="dropdown-option delete" onclick="startDelete('${chat.id}')"><i class="fas fa-trash-alt"></i> Delete</div></div>`; div.addEventListener('click', () => switchToChat(chat.id)); list.appendChild(div); }); }
     function toggleMenu(chatId) { const menu = document.getElementById('menu-' + chatId); document.querySelectorAll('.dropdown-menu').forEach(m => { if (m.id !== 'menu-' + chatId) m.classList.remove('show'); }); menu.classList.toggle('show'); }
     function openSharePopup() { document.getElementById('sharePopup').classList.add('show'); }
     function closeSharePopup() { document.getElementById('sharePopup').classList.remove('show'); }
 
-    function renderMessages() {
-      const area = document.getElementById('messagesArea'); area.innerHTML = '';
-      const chat = chats.find(c => c.id === activeChatId);
-      if (!chat) return;
-      document.getElementById('welcomeScreen').classList.add('hidden');
+    function renderMessages() { 
+      const area = document.getElementById('messagesArea'); area.innerHTML = ''; 
+      const chat = chats.find(c => c.id === activeChatId); 
+      if (!chat) return; 
+      document.getElementById('welcomeScreen').classList.add('hidden'); 
       document.getElementById('closeChatBtn').classList.add('visible'); 
-      chat.messages.forEach((msg, idx) => {
-        const wrapper = document.createElement('div'); wrapper.className = 'message-wrapper';
-        const row = document.createElement('div'); row.className = 'message-row ' + msg.role;
-        const avatar = document.createElement('div'); avatar.className = 'msg-avatar'; avatar.innerHTML = msg.role === 'user' ? '<i class="fas fa-user"></i>' : '👑';
-        const wrap = document.createElement('div'); wrap.className = 'msg-bubble-wrap';
-        const bubble = document.createElement('div'); bubble.className = 'msg-bubble ' + msg.role; bubble.textContent = msg.content || ' ';
-        if (msg.images && msg.images.length) { msg.images.forEach(img => { const imgEl = document.createElement('img'); imgEl.src = img; imgEl.style.cssText = 'max-width:140px;max-height:140px;border-radius:8px;margin-top:6px;border:1px solid var(--pink);'; bubble.appendChild(imgEl); }); }
-        const time = document.createElement('div'); time.className = 'msg-time'; time.textContent = new Date(msg.createdAt || Date.now()).toLocaleTimeString();
-        const actions = document.createElement('div'); actions.className = 'msg-actions';
-        if (msg.role === 'ai') { actions.innerHTML = `<button class="action-btn" onclick="speakText('${escapeHtml(msg.content)}')"><i class="fas fa-volume-up"></i> Speak</button><button class="action-btn" onclick="likeMsg(this)"><i class="far fa-thumbs-up"></i> Like</button><button class="action-btn" onclick="dislikeMsg(this)"><i class="far fa-thumbs-down"></i> Dislike</button><button class="action-btn" onclick="openSharePopup()"><i class="fas fa-share-alt"></i> Share</button><button class="action-btn" onclick="copyMsg('${escapeHtml(msg.content)}')"><i class="fas fa-copy"></i> Copy</button><button class="action-btn" onclick="makeLock('${escapeHtml(msg.content)}')"><i class="fas fa-lock"></i> Lock</button>`; }
-        else { actions.innerHTML = `<button class="action-btn" onclick="copyMsg('${escapeHtml(msg.content)}')"><i class="fas fa-copy"></i> Copy</button><button class="action-btn" onclick="deleteMsg(${idx})"><i class="fas fa-trash-alt"></i> Delete</button>`; }
-        wrap.appendChild(bubble); wrap.appendChild(time); wrap.appendChild(actions); row.appendChild(avatar); row.appendChild(wrap); wrapper.appendChild(row); area.appendChild(wrapper);
-      });
-      document.getElementById('chatContainer').scrollTop = document.getElementById('chatContainer').scrollHeight;
+      chat.messages.forEach((msg, idx) => { 
+        const wrapper = document.createElement('div'); wrapper.className = 'message-wrapper'; 
+        const row = document.createElement('div'); row.className = 'message-row ' + msg.role; 
+        const avatar = document.createElement('div'); avatar.className = 'msg-avatar'; avatar.innerHTML = msg.role === 'user' ? '<i class="fas fa-user"></i>' : '👑'; 
+        const wrap = document.createElement('div'); wrap.className = 'msg-bubble-wrap'; 
+        const bubble = document.createElement('div'); bubble.className = 'msg-bubble ' + msg.role; bubble.textContent = msg.content || ' '; 
+        if (msg.images && msg.images.length) { msg.images.forEach(img => { const imgEl = document.createElement('img'); imgEl.src = img; imgEl.style.cssText = 'max-width:140px;max-height:140px;border-radius:8px;margin-top:6px;border:1px solid var(--pink);'; bubble.appendChild(imgEl); }); } 
+        const time = document.createElement('div'); time.className = 'msg-time'; time.textContent = new Date(msg.createdAt || Date.now()).toLocaleTimeString(); 
+        const actions = document.createElement('div'); actions.className = 'msg-actions'; 
+        if (msg.role === 'ai') { actions.innerHTML = `<button class="action-btn" onclick="speakText('${escapeHtml(msg.content)}')"><i class="fas fa-volume-up"></i> Speak</button><button class="action-btn" onclick="likeMsg(this)"><i class="far fa-thumbs-up"></i> Like</button><button class="action-btn" onclick="dislikeMsg(this)"><i class="far fa-thumbs-down"></i> Dislike</button><button class="action-btn" onclick="openSharePopup()"><i class="fas fa-share-alt"></i> Share</button><button class="action-btn" onclick="copyMsg('${escapeHtml(msg.content)}')"><i class="fas fa-copy"></i> Copy</button><button class="action-btn" onclick="makeLock('${escapeHtml(msg.content)}')"><i class="fas fa-lock"></i> Lock</button>`; } 
+        else { actions.innerHTML = `<button class="action-btn" onclick="copyMsg('${escapeHtml(msg.content)}')"><i class="fas fa-copy"></i> Copy</button><button class="action-btn" onclick="deleteMsg(${idx})"><i class="fas fa-trash-alt"></i> Delete</button>`; } 
+        wrap.appendChild(bubble); wrap.appendChild(time); wrap.appendChild(actions); row.appendChild(avatar); row.appendChild(wrap); wrapper.appendChild(row); area.appendChild(wrapper); 
+      }); 
+      document.getElementById('chatContainer').scrollTop = document.getElementById('chatContainer').scrollHeight; 
     }
 
     // ===== SPEAK =====
@@ -546,7 +547,7 @@ END OF PROFESSIONAL MASTER LOCK.`;
     function updatePreviewArea() { const area = document.getElementById('inputPreviewArea'); area.innerHTML = ''; if (uploadedImages.length > 0) { area.classList.add('show'); uploadedImages.forEach((imgData, index) => { const div = document.createElement('div'); div.className = 'preview-thumb'; div.innerHTML = `<img src="${imgData}" /><button class="preview-remove" onclick="removeImage(${index})">×</button>`; area.appendChild(div); }); } else { area.classList.remove('show'); } }
     function removeImage(index) { uploadedImages.splice(index, 1); updatePreviewArea(); }
 
-    // ===== SEND MESSAGE & AI =====
+    // ===== SEND & AI =====
     function sendMessage() { const input = document.getElementById('messageInput'); const text = input.value.trim(); if (!text && uploadedImages.length === 0) return; let chat = chats.find(c => c.id === activeChatId); if (!chat) { createNewChat(); chat = chats.find(c => c.id === activeChatId); } if (chat.title === 'New Chat' && text) { chat.title = text.substring(0, 25) + (text.length > 25 ? '...' : ''); } const images = [...uploadedImages]; uploadedImages = []; updatePreviewArea(); chat.messages.push({ role: 'user', content: text || '📎 Image attached', images, createdAt: Date.now() }); input.value = ''; saveChats(); renderMessages(); showTyping(); setTimeout(async () => { const reply = await getAIResponse(text, chat); hideTyping(); chat.messages.push({ role: 'ai', content: reply, createdAt: Date.now() }); saveChats(); renderMessages(); }, 600); }
     async function getAIResponse(text, chat) { const apiKey = localStorage.getItem('wk_api_key') || ''; if (!apiKey) return "⚠️ Don Allah ka sanya Gemini API key ɗinka a Settings kafin ka ci gaba."; const model = localStorage.getItem('wk_model') || 'gemini-3.5-flash'; let lockContext = getActiveLocks().length ? "\n\n*** PERMANENT MASTER LOCKS (NEVER FORGET THESE): ***\n" + getActiveLocks().map(l => '🔒 ' + l.content).join('\n') : ""; let rulesContext = profileRules ? "\n\n*** PERMANENT PROFILE RULES (ALWAYS FOLLOW THESE): ***\n" + profileRules : ""; const history = chat.messages.slice(-10).map(m => ({ role: m.role === 'user' ? 'user' : 'model', parts: [{ text: m.content }] })); const contents = [{ role: 'user', parts: [{ text: WISE_KING_SYSTEM_PROMPT + rulesContext }] }, { role: 'model', parts: [{ text: 'Understood. I am operating as WISE KING AI with the Master Brain Lock active.' }] }, ...history, { role: 'user', parts: [{ text: text + lockContext }] }]; try { const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents }) }); const data = await res.json(); if (!res.ok) return '❌ ' + (data.error?.message || 'API error'); return data.candidates?.[0]?.content?.parts?.map(p => p.text || '').join('') || '❌ Babu amsa.'; } catch (err) { return '❌ ' + err.message; } }
 
@@ -560,21 +561,21 @@ END OF PROFESSIONAL MASTER LOCK.`;
     function deleteVaultLock(index) { if (confirm('Delete this permanent lock?')) { memoryStore.locks.splice(index, 1); saveMemory(); renderVaultLocks(); } }
     function exportLocks() { let text = "WISE KING AI - MASTER VAULT EXPORT\n=========================\n\n"; memoryStore.locks.forEach((l, i) => { text += (i+1) + ". " + l.content + "\n"; }); const blob = new Blob([text], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'WiseKingAI_Vault.txt'; document.body.appendChild(a); a.click(); document.body.removeChild(a); }
 
-    // ===== SETTINGS (Fully Repaired) =====
+    // ===== SETTINGS (Welcome Note Removed) =====
     function openSettings() { 
       document.getElementById('profileNameInput').value = document.getElementById('profileName').textContent; 
       document.getElementById('apiKeyInput').value = localStorage.getItem('wk_api_key') || ''; 
       document.getElementById('voiceLangSelect').value = localStorage.getItem('wk_voice_lang') || 'ha-NG'; 
-      document.getElementById('welcomeInput').value = localStorage.getItem('wk_welcome') || ''; 
       document.getElementById('profileRulesInput').value = localStorage.getItem('wk_profile_rules') || ''; 
       const savedAvatar = localStorage.getItem('wk_avatar'); 
       if (savedAvatar) { document.getElementById('avatarPreviewImg').src = savedAvatar; document.getElementById('avatarPreviewImg').style.display = 'block'; document.getElementById('avatarPreviewText').style.display = 'none'; } 
       else { document.getElementById('avatarPreviewImg').style.display = 'none'; document.getElementById('avatarPreviewText').style.display = 'block'; } 
+      document.getElementById('bgUploadStatus').textContent = '';
       document.getElementById('settingsModal').classList.add('show'); 
     }
     function handleAvatarUpload(event) { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = (e) => { const data = e.target.result; localStorage.setItem('wk_avatar', data); document.getElementById('profileAvatar').innerHTML = `<img src="${data}" style="width:100%;height:100%;object-fit:cover;" />`; document.getElementById('topAvatar').innerHTML = `<img src="${data}" style="width:100%;height:100%;object-fit:cover;" />`; }; reader.readAsDataURL(file); event.target.value = ''; }
     function changeTheme(color) { localStorage.setItem('wk_theme', color); document.documentElement.style.setProperty('--pink', color); }
-    function saveSettings() { localStorage.setItem('wk_api_key', document.getElementById('apiKeyInput').value.trim()); localStorage.setItem('wk_voice_lang', document.getElementById('voiceLangSelect').value); localStorage.setItem('wk_welcome', document.getElementById('welcomeInput').value); localStorage.setItem('wk_profile_rules', document.getElementById('profileRulesInput').value); profileRules = document.getElementById('profileRulesInput').value; const name = document.getElementById('profileNameInput').value.trim(); document.getElementById('profileName').textContent = name; localStorage.setItem('wk_user_name', name); const welcomeMsg = document.getElementById('welcomeInput').value; document.getElementById('welcomeTitle').textContent = welcomeMsg.split('\n')[0] || 'Sannu! Welcome to Wise King AI'; document.getElementById('welcomeDesc').innerHTML = welcomeMsg.split('\n').slice(1).join('<br>') || "I'm your persistent, intelligent assistant — created by <strong style='color:var(--pink);'>IBRAHIM ABDULLAHI</strong> from Nigeria 🇳🇬"; closeModal('settingsModal'); showToast('✅ Saved!'); }
+    function saveSettings() { localStorage.setItem('wk_api_key', document.getElementById('apiKeyInput').value.trim()); localStorage.setItem('wk_voice_lang', document.getElementById('voiceLangSelect').value); localStorage.setItem('wk_profile_rules', document.getElementById('profileRulesInput').value); profileRules = document.getElementById('profileRulesInput').value; const name = document.getElementById('profileNameInput').value.trim(); document.getElementById('profileName').textContent = name; localStorage.setItem('wk_user_name', name); closeModal('settingsModal'); showToast('✅ Settings saved!'); }
 
     // ===== UTILITIES =====
     function closeModal(id) { document.getElementById(id).classList.remove('show'); }
@@ -604,9 +605,8 @@ END OF PROFESSIONAL MASTER LOCK.`;
       const theme = localStorage.getItem('wk_theme'); if (theme) document.documentElement.style.setProperty('--pink', theme);
       const savedName = localStorage.getItem('wk_user_name'); if (savedName) document.getElementById('profileName').textContent = savedName;
       const savedAvatar = localStorage.getItem('wk_avatar'); if (savedAvatar) { document.getElementById('profileAvatar').innerHTML = `<img src="${savedAvatar}" style="width:100%;height:100%;object-fit:cover;" />`; document.getElementById('topAvatar').innerHTML = `<img src="${savedAvatar}" style="width:100%;height:100%;object-fit:cover;" />`; }
-      const welcomeMsg = localStorage.getItem('wk_welcome'); if (welcomeMsg) { document.getElementById('welcomeTitle').textContent = welcomeMsg.split('\n')[0]; document.getElementById('welcomeDesc').innerHTML = welcomeMsg.split('\n').slice(1).join('<br>'); }
       const voiceLang = localStorage.getItem('wk_voice_lang'); if (voiceLang) document.getElementById('voiceLangSelect').value = voiceLang;
-      console.log('👑 Wise King AI V2.0 — PROFESSIONAL MASTER LOCK ACTIVE!');
+      console.log('👑 Wise King AI V2.0 — Settings Repaired, Welcome Note Removed, Background Fixed!');
     }
     init();
   </script>
